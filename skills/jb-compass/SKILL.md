@@ -10,7 +10,7 @@ You must navigate these four phases sequentially. Do not jump ahead.
 **Goal**: Understand the core idea, the problem, and the desired user experience.
 
 1. **Intake**: Acknowledge the user's initial idea.
-2. **Research**: BEFORE asking questions, proactively research the domain, similar existing solutions, or technical precursors using available tools (web fetch, codebase search). This ensures your questions are high-level and strategic, not basic.
+2. **Research**: BEFORE asking questions, proactively delegate research to sub-agents to explore the domain, similar existing solutions, or technical precursors using available tools (web fetch, codebase search). This ensures your questions are high-level and strategic, not basic.
 3. **Targeted Inquiry**: Ask a small set of focused, open-ended questions to uncover:
     - **The Core**: What is the fundamental "Why" and "What" of this project?
     - **The Problem**: What specific pain point is this solving? Who is the target user?
@@ -50,7 +50,7 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 4: Anchoring
 **Goal**: Permanently record the North Star as the project's source of truth.
 
-Save the final approved artifact to a file named `NORTH_STAR.md` in the root of the project workspace. This file will be referenced by all future skills to ensure alignment.
+Save the final approved artifact to a file named `[Project Name].md` (using the project's actual name) in the root of the project workspace. This file will be referenced by all future skills to ensure alignment.
 
 ## Guidelines
 - **Stay High-Level**: Avoid getting bogged down in implementation details, specific libraries, or PRD-level feature lists.

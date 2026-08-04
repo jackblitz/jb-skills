@@ -19,17 +19,17 @@ show_help() {
 install_local() {
     echo "Installing skills locally in current workspace..."
     
-    OPencode_local="$PWD/.agents/skills"
+    Opencode_local="$PWD/.agents/skills"
     Claude_local="$PWD/.claude/skills"
     
-    mkdir -p "$OPencode_local" "$Claude_local"
+    mkdir -p "$Opencode_local" "$Claude_local"
     
     # Symlink every skill in the hub to both local directories
     for skill in "$SKILLS_DIR"/*/; do
         skill_name=$(basename "$skill")
         
         echo "Linking $skill_name..."
-        ln -sf "$skill" "$OPencode_local/$skill_name"
+        ln -sf "$skill" "$Opencode_local/$skill_name"
         ln -sf "$skill" "$Claude_local/$skill_name"
     done
     
@@ -39,17 +39,17 @@ install_local() {
 install_global() {
     echo "Installing skills globally..."
     
-    OPencode_global="$HOME/.agents/skills"
+    Opencode_global="$HOME/.agents/skills"
     Claude_global="$HOME/.claude/skills"
     
-    mkdir -p "$OPencode_global" "$Claude_global"
+    mkdir -p "$Opencode_global" "$Claude_global"
     
     # Symlink every skill in the hub to both global directories
     for skill in "$SKILLS_DIR"/*/; do
         skill_name=$(basename "$skill")
         
         echo "Linking $skill_name..."
-        ln -sf "$skill" "$OPencode_global/$skill_name"
+        ln -sf "$skill" "$Opencode_global/$skill_name"
         ln -sf "$skill" "$Claude_global/$skill_name"
     done
     
