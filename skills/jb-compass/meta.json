@@ -1,6 +1,0 @@
-{
-  "id": "jb-compass",
-  "name": "JB Compass",
-  "version": "0.1.0",
-  "description": "The project North Star skill. Helps users and LLMs align on the core purpose, problem, and user experience of a project before starting implementation."
-}
