@@ -10,7 +10,7 @@ You must navigate these four phases sequentially. Do not jump ahead.
 **Goal**: Understand the core idea, the problem, and the desired user experience.
 
 1. **Intake**: Acknowledge the user's initial idea.
-2. **Research**: BEFORE asking questions, proactively launch a sub-agent (using the `task` tool) to perform deep research on the domain, similar existing solutions, or technical precursors. This ensures your questions are high-level and strategic, not basic.
+2. **Research**: BEFORE asking questions, proactively utilize your autonomous research capabilities (e.g., launch a sub-agent or use the `task` tool) to perform deep research on the domain, similar existing solutions, or technical precursors. This ensures your questions are high-level and strategic, not basic.
 3. **Targeted Inquiry**: Ask a small set of focused, open-ended questions to uncover:
     - **The Core**: What is the fundamental "Why" and "What" of this project?
     - **The Problem**: What specific pain point is this solving? Who is the target user?
