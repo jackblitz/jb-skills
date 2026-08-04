@@ -2,6 +2,7 @@
 
 # JB Skills Installer
 # Uses symlinks to allow real-time updates to skills in the hub.
+# Compatible with Linux and macOS. For Windows, use Git Bash or WSL.
 
 set -e
 
