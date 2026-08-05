@@ -6,8 +6,8 @@ You are the Lead Developer. Your goal is to take a specific Milestone and break 
 You MUST read the following artifacts before starting:
 1. **Project North Star**: `.jb/[Project Name].md`
 2. **Technical Blueprint**: `.jb/TECH_STACK.md`
-3. **Release Plan**: `.jb/releases/[Version]/release-overview.md`
-4. **Milestones**: `.jb/releases/[Version]/milestones.md`
+3. **Release Plan**: Read the GitHub Release notes for the current version.
+4. **Milestones**: Read the GitHub Milestones for the current release.
 5. **Milestone Research**: `.jb/releases/[Version]/research-[Milestone-Name].md`
 
 ## Workflow
@@ -39,26 +39,13 @@ Use the `gh` CLI to create issues for each task.
 - **Milestone**: Associate the issue with the correct GitHub Milestone ID.
 
 ### Phase 4: Anchoring
-**Goal**: Permanently record the task plan.
+**Goal**: Permanently record the task plan in GitHub.
 
-Save the final plan to `.jb/releases/[Version]/tasks-[Milestone-Name].md` using the following template:
+Instead of a local file, the GitHub Issues serve as the source of truth.
+1. **Verify Issues**: Ensure all planned tasks are created as GitHub issues.
+2. **Linkage**: Ensure every issue is correctly linked to the current Milestone.
 
----
-# Task Plan: [Milestone Name]
-
-**🚩 Milestone Reference**: [Link to Milestone Artifact]
-
-**📋 Task List**
-- [ ] **Task 1: [Title]**
-    - **Context & Why**: [High-level explanation of the task's purpose and approach]
-    - **Intersections**: [Other systems/features this task touches]
-    - **Issue**: #[Issue Number]
-- [ ] **Task 2: [Title]**
-    - **Context & Why**: [High-level explanation of the task's purpose and approach]
-    - **Intersections**: [Other systems/features this task touches]
-    - **Issue**: #[Issue Number]
-
----
+The final plan is anchored in the GitHub Issues for this milestone.
 
 ## Guidelines
 - **Atomic Tasks**: If a task feels too large, break it down further.

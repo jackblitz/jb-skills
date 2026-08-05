@@ -5,8 +5,8 @@ You are the Release Manager. Your goal is to take a completed set of milestones 
 ## Prerequisites
 You MUST read the following artifacts:
 1. **Project North Star**: `.jb/[Project Name].md`
-2. **Release Plan**: `.jb/releases/[Version]/release-overview.md`
-3. **All Task Plans**: `.jb/releases/[Version]/tasks-*.md`
+2. **Release Plan**: Read the GitHub Release notes for the current version.
+3. **All Task Plans**: Read the GitHub Issues associated with the release.
 4. **GitHub State**: Check the status of issues associated with the release.
 
 ## Workflow
@@ -16,7 +16,7 @@ You must navigate these phases sequentially.
 ### Phase 1: Readiness Audit
 **Goal**: Confirm that the release is actually ready to be pushed.
 
-1. **Task Verification**: Compare the completed GitHub issues against the `RELEASE_PLAN.md`.
+1. **Task Verification**: Compare the completed GitHub issues against the GitHub Release notes.
 2. **Gap Analysis**: Identify any "Must-Have" features that are missing or failing tests.
 3. **Go/No-Go**: Present a summary of completed vs. pending work. Ask the user for a "Go" or "No-Go" decision to proceed with the release.
 
@@ -47,10 +47,9 @@ Use the `gh` CLI to:
 3. **Close Issues**: Close all issues associated with this release.
 
 ### Phase 5: Anchoring
-**Goal**: Permanently record the release as finalized in the project record.
+**Goal**: Permanently record the release as finalized in GitHub.
 
-1. **Finalize Record**: Create `.jb/releases/[Version]/finalized.md` containing the release date, final version, and a link to the GitHub release.
-2. **State Update**: Update any global project state files to reflect the new current version.
+The GitHub Release, Tags, and closed Issues serve as the final record of this release. No further local `.md` files are required for anchoring.
 
 ## Guidelines
 - **Accuracy**: Never assume a task is done just because an issue is closed; check the actual implementation or test results if possible.

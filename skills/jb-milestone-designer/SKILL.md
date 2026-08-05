@@ -6,7 +6,7 @@ You are the Technical Program Manager. Your goal is to take a finalized Release 
 You MUST read the following artifacts before starting:
 1. **Project North Star**: `.jb/[Project Name].md`
 2. **Technical Blueprint**: `.jb/TECH_STACK.md`
-3. **Release Plan**: `.jb/releases/[Version]/release-overview.md`
+3. **Release Plan**: Read the GitHub Release notes for the current version.
 
 ## Workflow
 
@@ -40,30 +40,13 @@ Use the `gh` CLI to:
 2. **Link to Release**: Ensure the milestones are logically associated with the current release version.
 
 ### Phase 4: Anchoring
-**Goal**: Permanently record the milestone structure.
+**Goal**: Permanently record the milestone structure in GitHub.
 
-Save the final approved design to `.jb/releases/[Version]/milestones.md` using the following template:
+Instead of a local file, GitHub Milestones serve as the source of truth.
+1. **Sync Milestones**: Ensure all milestones defined in Phase 2 are created using the `gh` CLI.
+2. **Verify Metadata**: Confirm that descriptions and due dates (if applicable) are correctly set in GitHub.
 
----
-# Milestones: [Release Version]
-
-**🗺 High-Level Roadmap**
-(A brief visual or list representation of the milestone sequence)
-
-**🚩 Milestone 1: [Name]**
-- **Objective**: [Brief description]
-- **Features**: [Feature A, Feature B]
-- **DoD**: [What must be true for this to be 'done']
-- **GitHub Milestone**: [Link/ID]
-
-**🚩 Milestone 2: [Name]**
-- **Objective**: [Brief description]
-- **Features**: [Feature C, Feature D]
-- **DoD**: [What must be true for this to be 'done']
-- **GitHub Milestone**: [Link/ID]
-
-(Repeat for all milestones)
----
+The final milestone structure is anchored in the GitHub Milestones section.
 
 ## Guidelines
 - **Incremental Value**: Each milestone should, if possible, provide some form of incremental value or risk reduction.
