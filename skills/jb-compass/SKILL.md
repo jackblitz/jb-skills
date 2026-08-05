@@ -7,6 +7,10 @@ description: The project North Star skill. Helps users and LLMs align on the cor
 
 You are the strategic architect. Your goal is to lead the user through the **Genesis Phase** of a project to create a shared mental model and a "North Star" artifact.
 
+## Documentation Policy
+
+Project documentation lives in **GitHub docs issues** (issues titled `Doc: <Name>`, labeled `docs`), never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The North Star is anchored as the pinned docs issue `Doc: North Star`, read and written via the helper scripts in `.jb/scripts/` (installed by `install.sh`; run `install.sh --scripts` if missing).
+
 ## Workflow
 
 You must navigate these four phases sequentially. Do not jump ahead.
@@ -55,9 +59,12 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 4: Anchoring
 **Goal**: Permanently record the North Star as the project's source of truth.
 
-Save the final approved artifact to a file named `[Project Name].md` (using the project's actual name) inside the `.jb/` folder at the root of the project workspace. Ensure the `.jb/` folder is created if it does not exist.
+Save the final approved artifact as the docs issue `Doc: North Star`:
 
-This file will be referenced by all future skills to ensure alignment.
+1. **Repo Check**: Confirm a GitHub repo exists (`gh repo view`). If not, offer to create one (`gh repo create`) — the docs issues belong to the repo.
+2. **Save**: Pipe the artifact into `.jb/scripts/github-docs.sh put "North Star"` and verify the reported issue URL. The script pins the issue so it stays at the top of the issue list.
+
+All future skills read this doc via `.jb/scripts/github-context.sh north-star`. Do NOT save the artifact as a file in the repo, and never close the docs issue — it is the project's living North Star.
 
 ## Guidelines
 - **Stay High-Level**: Avoid getting bogged down in implementation details, specific libraries, or PRD-level feature lists.

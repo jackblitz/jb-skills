@@ -2,5 +2,5 @@
   "id": "jb-task-planner",
   "name": "JB Task Planner",
   "version": "0.1.0",
-  "description": "The granular planning skill. Breaks milestones into tasks, designs API surfaces, and plans required tests."
+  "description": "The implementation planning skill. Breaks a milestone into tasks, creates interface stubs and failing tests, and files GitHub Issues."
 }

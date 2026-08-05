@@ -1,5 +1,5 @@
 interface:
   display_name: "JB Feature Implementer"
-  short_description: "Execute TDD implementation with 3-stage review."
+  short_description: "Fill in scaffolded stubs until the planned tests pass."
 policy:
   allow_implicit_invocation: false

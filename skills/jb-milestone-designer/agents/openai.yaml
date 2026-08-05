@@ -1,5 +1,5 @@
 interface:
   display_name: "JB Milestone Designer"
-  short_description: "Break a release plan into strategic milestones."
+  short_description: "Plan the full milestone set needed to complete the release."
 policy:
   allow_implicit_invocation: false

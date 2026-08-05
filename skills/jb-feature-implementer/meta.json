@@ -2,5 +2,5 @@
   "id": "jb-feature-implementer",
   "name": "JB Feature Implementer",
   "version": "0.1.0",
-  "description": "The TDD implementation skill. Executes a 3-stage review cycle (Interface -> Tests -> Code) to implement features."
+  "description": "The execution skill. Fills in the scaffolded interface stubs until the planned tests pass, delivered as the Green PR."
 }

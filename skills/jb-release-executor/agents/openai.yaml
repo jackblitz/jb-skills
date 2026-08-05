@@ -1,5 +1,5 @@
 interface:
   display_name: "JB Release Executor"
-  short_description: "Finalize the release, bump version, and push to GitHub."
+  short_description: "Audit, tag, and create the GitHub Release at ship time."
 policy:
   allow_implicit_invocation: false
