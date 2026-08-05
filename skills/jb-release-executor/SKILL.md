@@ -34,8 +34,8 @@ You must navigate these phases sequentially.
 **Goal**: Determine the final version string.
 
 1. **Version Logic**: Start from the target version in the tracking issue; based on what actually shipped (Major, Minor, or Patch), propose the final version number (e.g., `v1.0.0`).
-2. **Version Bump**: Update version strings in the project's manifest files (e.g., `package.json`, `Cargo.toml`) if applicable.
-3. **Approval**: Confirm the version number with the user.
+2. **Approval**: Confirm the version number with the user. Do NOT modify any files before this approval — propose first, write second.
+3. **Version Bump**: Only after approval, update version strings in the project's manifest files (e.g., `package.json`, `Cargo.toml`) if applicable.
 
 ### Phase 3: Release Notes Synthesis
 **Goal**: Create a professional, human-readable changelog.
