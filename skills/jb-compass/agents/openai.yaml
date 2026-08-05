@@ -1,0 +1,5 @@
+interface:
+  display_name: "JB Compass"
+  short_description: "The project North Star skill. Align on core purpose, problem, and UX."
+policy:
+  allow_implicit_invocation: false
