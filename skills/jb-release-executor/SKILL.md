@@ -14,10 +14,10 @@ You are the Release Manager. Your goal is to take a completed set of milestones 
 - **Guard**: If a GitHub Release already exists for this version before this skill runs, something upstream went wrong — flag it to the user instead of assuming it's valid.
 
 ## Prerequisites
-You MUST read the following:
-1. **Project North Star**: `.jb/[Project Name].md`
-2. **Release Plan**: The `release-plan` tracking issue for the current release (`gh issue list --label release-plan`).
-3. **Milestones & Issues**: The GitHub Milestones for this release and the status of every issue in them.
+You MUST read the following (helper scripts live in `.jb/scripts/`; run `install.sh --scripts` if missing):
+1. **Project North Star**: `.jb/scripts/github-context.sh north-star`
+2. **Release Plan**: `.jb/scripts/github-context.sh release-plan`
+3. **Milestones & Issues**: `.jb/scripts/github-milestone.sh list` and the status of every issue in them.
 
 ## Workflow
 
@@ -55,7 +55,7 @@ Use the `gh` CLI to:
 1. **Tag**: `git tag [Version] && git push origin [Version]` (double-check the tag name first).
 2. **Create the Release**: `gh release create [Version] --title "[Release Title]" --notes "[Final Release Notes]"`.
 3. **Close Out Planning Constructs**:
-    - Close all GitHub Milestones belonging to this release.
+    - Close all GitHub Milestones belonging to this release (`.jb/scripts/github-milestone.sh close [number]`).
     - Check off the completed features in the `release-plan` tracking issue, comment with a link to the published Release, and close it.
 
 ### Phase 5: Anchoring

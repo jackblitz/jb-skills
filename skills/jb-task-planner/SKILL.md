@@ -9,17 +9,17 @@ You are the Lead Developer. Your goal is to take a specific Milestone and produc
 
 ## GitHub Concept Mapping
 
-- **Input**: A GitHub Milestone (created by `jb-milestone-designer`) and its research file.
-- **Output**: One **GitHub Issue per task** (assigned to the Milestone) plus committed **scaffolding code**: interface stubs and a failing ("Red") test suite.
-- **Not this skill**: No GitHub Milestones, no GitHub Releases, no working implementations — stub bodies stay unimplemented.
+- **Input**: A GitHub Milestone (created by `jb-milestone-designer`) and its `Research-[Milestone-Name]` wiki page.
+- **Output**: One **GitHub Issue per task** (assigned to the Milestone, with all doc links attached) plus committed **scaffolding code**: interface stubs and a failing ("Red") test suite.
+- **Not this skill**: No GitHub Milestones, no GitHub Releases, no working implementations — stub bodies stay unimplemented. No `.md` files in the repo (docs go to the wiki or issue bodies; only `README.md` and `CODING_STANDARDS.md` live in-repo).
 
 ## Prerequisites
-You MUST read the following before starting:
-1. **Project North Star**: `.jb/[Project Name].md`
-2. **Technical Blueprint**: `.jb/TECH_STACK.md`
-3. **Release Plan**: The `release-plan` tracking issue for the current release.
-4. **Milestones**: The GitHub Milestones for the current release.
-5. **Milestone Research**: `.jb/releases/[Version]/research-[Milestone-Name].md`
+You MUST read the following before starting (helper scripts live in `.jb/scripts/`; run `install.sh --scripts` if missing):
+1. **Project North Star**: `.jb/scripts/github-context.sh north-star`
+2. **Technical Blueprint**: `.jb/scripts/github-context.sh tech-stack`
+3. **Release Plan**: `.jb/scripts/github-context.sh release-plan`
+4. **Milestones**: `.jb/scripts/github-milestone.sh list`
+5. **Milestone Research**: `.jb/scripts/github-context.sh research [Milestone-Name]`
 6. **Coding Standards**: Check for `CODING_STANDARDS.md` in the project root. If it does not exist, ask the user: *"I noticed there is no CODING_STANDARDS.md file. Would you like to create one now to ensure consistent code across the project?"*
 
 ## Workflow
@@ -30,7 +30,7 @@ You must navigate these phases sequentially. Phases 2 and 3 each require explici
 **Goal**: Identify the specific Milestone to be planned.
 
 - **Input**: Expect a Milestone Name or ID from the user (e.g., "Plan tasks for Milestone 2").
-- **Context**: Locate the milestone in GitHub Milestones and read its research file at `.jb/releases/[Version]/research-[Milestone-Name].md`.
+- **Context**: Read the milestone (`.jb/scripts/github-context.sh milestone [name]`) and the research wiki page linked from its description (`.jb/scripts/github-context.sh research [name]`).
 - **Confirmation**: Confirm with the user that you are targeting the correct milestone before proceeding.
 
 ### Phase 1: Task Breakdown
@@ -71,10 +71,11 @@ For each approved task:
 
 Use the `gh` CLI to create one issue per task:
 - **Title**: `[Milestone Name] Task: [Short Description]`
-- **Body**: Include:
+- **Body**: Must be self-sufficient — an LLM should be able to load full context from the issue alone. Include:
     - **Context & Why**: The high-level implementation plan for the task.
     - **System Intersections**: Other components/features this task touches.
     - **Scaffolding**: Paths to the interface stub files and test files, and the Red PR link. The implementer's job is to make these exact tests pass.
+    - **Documentation Links**: The milestone's `Research-[Milestone-Name]` wiki page, plus the `North-Star` and `Tech-Stack` wiki pages (use `.jb/scripts/github-wiki.sh url [Page]`).
 - **Labels**: Apply relevant labels (e.g., `todo`, `enhancement`).
 - **Milestone**: Associate the issue with the correct GitHub Milestone.
 

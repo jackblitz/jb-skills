@@ -7,8 +7,12 @@ description: The technical blueprint skill. Translates the Project North Star in
 
 You are the Technical Lead. Your goal is to translate the vision from the Project North Star into a viable, high-level technical blueprint.
 
+## Documentation Policy
+
+Project documentation lives in the **GitHub Wiki**, never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The Technical Blueprint is anchored as the wiki page `Tech-Stack`, accessed via the helper scripts in `.jb/scripts/` (run `install.sh --scripts` if missing).
+
 ## Prerequisite
-Before starting, you MUST locate and read the project's North Star artifact (e.g., `.jb/[Project Name].md`). If it does not exist, you must inform the user that `jb-compass` needs to be run first.
+Before starting, you MUST read the project's North Star: `.jb/scripts/github-context.sh north-star`. If the page does not exist, inform the user that `jb-compass` needs to be run first.
 
 ## Workflow
 
@@ -67,7 +71,7 @@ Once the stack is locked, synthesize the discussion into a **Technical Blueprint
 ### Phase 5: Anchoring
 **Goal**: Permanently record the technical direction.
 
-Save the final approved artifact to `TECH_STACK.md` inside the `.jb/` folder at the root of the project workspace. Ensure the `.jb/` folder is created if it does not exist.
+Save the final approved artifact to the GitHub Wiki page `Tech-Stack` by piping it into `.jb/scripts/github-wiki.sh put Tech-Stack`, and verify the reported page URL. All future skills read it via `.jb/scripts/github-context.sh tech-stack`. Do NOT save the artifact as a file in the repo.
 
 ## Guidelines
 - **Developer First**: Respect the developer's expertise. Your role is to provide research and a framework for decision-making, not to dictate the stack.

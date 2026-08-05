@@ -7,6 +7,10 @@ description: The project North Star skill. Helps users and LLMs align on the cor
 
 You are the strategic architect. Your goal is to lead the user through the **Genesis Phase** of a project to create a shared mental model and a "North Star" artifact.
 
+## Documentation Policy
+
+Project documentation lives in the **GitHub Wiki**, never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The North Star is anchored as the wiki page `North-Star`, read and written via the helper scripts in `.jb/scripts/` (installed by `install.sh`; run `install.sh --scripts` if missing).
+
 ## Workflow
 
 You must navigate these four phases sequentially. Do not jump ahead.
@@ -55,9 +59,13 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 4: Anchoring
 **Goal**: Permanently record the North Star as the project's source of truth.
 
-Save the final approved artifact to a file named `[Project Name].md` (using the project's actual name) inside the `.jb/` folder at the root of the project workspace. Ensure the `.jb/` folder is created if it does not exist.
+Save the final approved artifact to the GitHub Wiki page `North-Star`:
 
-This file will be referenced by all future skills to ensure alignment.
+1. **Repo Check**: Confirm a GitHub repo exists (`gh repo view`). If not, offer to create one (`gh repo create`) — the wiki belongs to the repo.
+2. **Wiki Check**: The wiki must be initialized once by creating its first page in the browser (the helper script prints instructions if the wiki is missing). Enable it with `gh repo edit --enable-wiki` if needed.
+3. **Save**: Pipe the artifact into `.jb/scripts/github-wiki.sh put North-Star` and verify the reported page URL.
+
+All future skills read this page via `.jb/scripts/github-context.sh north-star`. Do NOT save the artifact as a file in the repo.
 
 ## Guidelines
 - **Stay High-Level**: Avoid getting bogged down in implementation details, specific libraries, or PRD-level feature lists.

@@ -8,13 +8,25 @@ set -e
 
 SKILLS_HUB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILLS_DIR="$SKILLS_HUB_ROOT/skills"
+SCRIPTS_DIR="$SKILLS_HUB_ROOT/scripts"
 
 show_help() {
     echo "Usage: $0 [OPTION]"
     echo "Options:"
     echo "  --local    Install skills as symlinks in the current workspace"
+    echo "             and copy helper scripts to ./.jb/scripts"
     echo "  --global   Install skills as symlinks in the global config directories"
+    echo "  --scripts  Copy only the helper scripts to ./.jb/scripts"
     echo "  --help     Show this help message"
+}
+
+copy_scripts() {
+    local dest="$PWD/.jb/scripts"
+    echo "Copying helper scripts to $dest..."
+    mkdir -p "$dest"
+    cp "$SCRIPTS_DIR"/*.sh "$dest/"
+    chmod +x "$dest"/*.sh
+    echo "Helper scripts installed. Commit .jb/scripts so agents and CI can use them."
 }
 
 link_skills() {
@@ -50,6 +62,7 @@ install_local() {
     # OpenCode discovers <root>/.agents/skills/<name>/SKILL.md and
     # <root>/.opencode/skills/...; Claude Code uses <root>/.claude/skills/...
     link_skills "$PWD/.agents/skills" "$PWD/.claude/skills"
+    copy_scripts
 
     echo "Successfully installed skills locally."
 }
@@ -60,6 +73,8 @@ install_global() {
     link_skills "$HOME/.agents/skills" "$HOME/.claude/skills"
 
     echo "Successfully installed skills globally."
+    echo "Note: helper scripts are per-project. Run '$0 --scripts' inside each"
+    echo "project repo to copy them to ./.jb/scripts."
 }
 
 if [[ "$1" == "--help" || -z "$1" ]]; then
@@ -73,6 +88,9 @@ case "$1" in
         ;;
     --global)
         install_global
+        ;;
+    --scripts)
+        copy_scripts
         ;;
     *)
         echo "Invalid option: $1"

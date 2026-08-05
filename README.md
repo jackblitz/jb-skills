@@ -26,8 +26,8 @@ This workflow must be followed sequentially. Each stage produces the "Source of 
 
 | Stage | Skill | Trigger | Goal | Source of Truth |
 | :--- | :--- | :--- | :--- | :--- |
-| **1. Vision** | `jb-compass` | `"Run jb-compass"` | Align on core purpose & UX | `.jb/[Project Name].md` |
-| **2. Blueprint** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | `.jb/TECH_STACK.md` |
+| **1. Vision** | `jb-compass` | `"Run jb-compass"` | Align on core purpose & UX | Wiki: `North-Star` |
+| **2. Blueprint** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | Wiki: `Tech-Stack` |
 | **3. Strategy** | `jb-release-planner` | `"Run jb-release-planner"` | Scope the release & generate the feature list | Tracking Issue (`release-plan`) + Project |
 | **4. Architecture** | `jb-milestone-designer` | `"Run jb-milestone-designer"` | Plan the full milestone set covering all features | GitHub Milestones |
 | **5. Tactics** | `jb-task-planner` | `"Run jb-task-planner for [Milestone]"` | Break into tasks; create interface stubs & failing tests | GitHub Issues + Red PR |
@@ -53,13 +53,13 @@ GitHub's own terminology is the main source of confusion, so each GitHub constru
 ## 📘 Detailed Workflow Guide
 
 ### 1. Vision & Blueprint (`jb-compass` & `jb-stack`)
-These skills establish the "What" and "How" of the project. They create the foundational documents in the `.jb/` folder, which serve as the permanent anchor for all future decisions.
+These skills establish the "What" and "How" of the project. They anchor the foundational documents as GitHub Wiki pages (`North-Star` and `Tech-Stack`), which serve as the permanent reference for all future decisions.
 
 ### 2. The Planning Chain (`planner` $\rightarrow$ `designer` $\rightarrow$ `planner`)
 This phase moves the project from a document to a living management system in GitHub:
 - **Release Planner**: Scopes the release and generates the feature list (Must-Have / Should-Have / Deferred), anchored in a `release-plan` tracking issue and Project board. It does **not** create a GitHub Release.
-- **Milestone Designer**: Reads the *entire* feature list and plans how many milestones it will take to complete the release — every Must-Have feature is assigned to exactly one milestone. It researches each milestone (requirements, blockers, dependencies) and creates the GitHub Milestones.
-- **Task Planner**: Breaks a milestone into atomic tasks and makes each task's plan concrete: it creates the **interface/header stubs** (Architect review) and the **failing test suite** (QA review) — the "Red PR" — then files one GitHub Issue per task linking to the scaffolding.
+- **Milestone Designer**: Reads the *entire* feature list and plans how many milestones it will take to complete the release — every Must-Have feature is assigned to exactly one milestone. It researches each milestone (requirements, blockers, dependencies), publishes the research as a `Research-<Milestone>` wiki page, and creates the GitHub Milestones with the research linked from each description.
+- **Task Planner**: Breaks a milestone into atomic tasks and makes each task's plan concrete: it creates the **interface/header stubs** (Architect review) and the **failing test suite** (QA review) — the "Red PR" — then files one GitHub Issue per task linking to the scaffolding and the relevant wiki docs, so an implementing LLM can pull full context from the issue alone.
 
 ### 3. The Execution Cycle (`jb-feature-implementer`)
 With the contract already scaffolded, execution is focused:
@@ -73,6 +73,25 @@ The release executor audits the completed GitHub issues against the `release-pla
 
 ---
 
-## 📂 Project Structure
-- `.jb/`: Contains the foundational project vision and technical blueprint.
-- GitHub: Serves as the source of truth for all planning, task tracking, and release management.
+## 📂 Where Documentation Lives
+
+**No planning or research `.md` files are ever written into the project repo.** The only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`.
+
+| Document | Home | Written By |
+| :--- | :--- | :--- |
+| Project North Star | Wiki page `North-Star` | `jb-compass` |
+| Technical Blueprint | Wiki page `Tech-Stack` | `jb-stack` |
+| Release Plan | Tracking issue (`release-plan` label) | `jb-release-planner` |
+| Milestone Research | Wiki page `Research-<Milestone>`, linked from the milestone | `jb-milestone-designer` |
+| Task Context | GitHub Issue body, with wiki links attached | `jb-task-planner` |
+| Coding Standards | `CODING_STANDARDS.md` (in-repo) | user / `jb-task-planner` prompt |
+
+Milestones and issues always link the wiki pages they depend on, so an LLM can pull exactly the right documents into context from the GitHub object it is working on.
+
+## 🔧 Helper Scripts (`.jb/scripts/`)
+
+`install.sh --local` (or `--scripts`) copies these into the project at `.jb/scripts/` — commit them so agents and CI can use them:
+
+- `github-wiki.sh` — read/write/list GitHub Wiki pages (`get`, `put`, `list`, `url`). The wiki must be initialized once by creating its first page in the browser.
+- `github-context.sh` — pull the right doc into an LLM's context: `north-star`, `tech-stack`, `research <Milestone>`, `release-plan`, `milestone <n>`, `task <n>`, `all`.
+- `github-milestone.sh` — milestone helpers (`create`, `list`, `view`, `close`) wrapping the REST API, since `gh` has no native milestone command.

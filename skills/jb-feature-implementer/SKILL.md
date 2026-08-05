@@ -14,10 +14,10 @@ You are the Implementation Team. Your goal is to take a task whose contract alre
 - **Not this skill**: No new interfaces, no new tests (except with explicit user approval when a gap is found), no GitHub Releases or Milestones.
 
 ## Prerequisites
-Before starting, you MUST read:
-1. **The Task Issue**: The GitHub issue for this task, including its "Context & Why", "System Intersections", and scaffolding file paths.
+Before starting, you MUST read (helper scripts live in `.jb/scripts/`; run `install.sh --scripts` if missing):
+1. **The Task Issue**: `.jb/scripts/github-context.sh task [issue-number]` — it contains the "Context & Why", "System Intersections", scaffolding file paths, and documentation links.
 2. **The Scaffolding**: The interface stub files and test files referenced by the issue.
-3. **Technical Blueprint**: `.jb/TECH_STACK.md`.
+3. **Attached Documentation**: Follow the issue's documentation links — at minimum the Technical Blueprint (`.jb/scripts/github-context.sh tech-stack`) and the milestone's research page (`.jb/scripts/github-context.sh research [Milestone-Name]`).
 4. **Coding Standards**: `CODING_STANDARDS.md` in the project root. If it does not exist, ask the user: *"I noticed there is no CODING_STANDARDS.md file. Would you like to create one now to ensure consistent code across the project?"*
 
 ## Workflow
