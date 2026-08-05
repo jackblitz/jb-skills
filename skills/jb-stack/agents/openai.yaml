@@ -1,0 +1,5 @@
+interface:
+  display_name: "JB Stack"
+  short_description: "Define the tech stack and high-level architecture."
+policy:
+  allow_implicit_invocation: false

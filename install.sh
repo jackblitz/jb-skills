@@ -20,8 +20,8 @@ show_help() {
 install_local() {
     echo "Installing skills locally in current workspace..."
     
-    Opencode_local="$PWD/.agents/skills"
-    Claude_local="$PWD/.claude/skills"
+    Opencode_local="$PWD/.agents/skills/local"
+    Claude_local="$PWD/.claude/skills/local"
     
     mkdir -p "$Opencode_local" "$Claude_local"
     
@@ -40,8 +40,8 @@ install_local() {
 install_global() {
     echo "Installing skills globally..."
     
-    Opencode_global="$HOME/.agents/skills"
-    Claude_global="$HOME/.claude/skills"
+    Opencode_global="$HOME/.agents/skills/local"
+    Claude_global="$HOME/.claude/skills/local"
     
     mkdir -p "$Opencode_global" "$Claude_global"
     
