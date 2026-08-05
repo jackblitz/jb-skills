@@ -47,13 +47,18 @@ You must navigate these phases sequentially. Phases 2 and 3 each require explici
 For each approved task:
 1. **Interface Definition**: Create the interface/header files: **public** methods, types, and variables only.
 2. **Stub Bodies**: Function bodies must be stubs — throw a "not implemented" error or return a placeholder per language convention. Never write real logic.
-3. **Documentation**: Add detailed comments to every public member explaining:
-    - What the function does.
-    - The expected inputs and outputs.
-    - Any specific constraints or assumptions.
-4. **Review**: Present the interfaces to the user.
+3. **API Usage Header**: At the top of every interface/header file, add one short block clearly showing how the API is used — a minimal, realistic example of the primary call flow. A developer reading the file must understand how to use it before reading any member.
+4. **Member Comments**: Comment each public member following the Commenting Standard below.
+5. **Review**: Present the interfaces to the user.
    - *Agent Role*: Act as the **Architect**.
    - *Approval*: User must confirm the API surface is correct before tests are written.
+
+#### Commenting Standard (strict)
+- Each comment states only: **what** the function does, **why** it exists, what goes **in**, and what comes **out**. Nothing else.
+- Write for the developer reading the code cold — super clear, minimal but informative. If the member's name and signature already say everything, do not add a comment.
+- Comments describe the **contract, not the implementation** — they must remain true when internals change. A comment only needs updating when the function's behavior itself changes; it must never go stale ("dead") from an internal refactor.
+- **NEVER** reference tickets, issue numbers, other tasks, or upcoming/next features in code comments. That context lives in GitHub, not in the code.
+- No noise: no restating the function name in prose, no boilerplate blocks on trivial members, no commented-out code, no TODO markers pointing at future work.
 
 ### Phase 3: Test-First Setup (QA Review)
 **Goal**: Create the verification layer for each task.
