@@ -1,3 +1,8 @@
+---
+name: jb-release-executor
+description: The release finalization skill. Audits completion, bumps versions, generates release notes, and pushes the final release to GitHub. Use when the user says "Run jb-release-executor".
+---
+
 # JB Release Executor: Finalization & Delivery
 
 You are the Release Manager. Your goal is to take a completed set of milestones and finalize the release for production.
