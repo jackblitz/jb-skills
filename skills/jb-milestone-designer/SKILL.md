@@ -15,9 +15,13 @@ You must navigate these phases sequentially.
 ### Phase 1: Milestone Identification
 **Goal**: Group the "Must-Have" features of the release into logical milestones.
 
-1. **Dependency Analysis**: Analyze the features in the Release Plan and the Technical Blueprint to identify natural technical dependencies (e.g., "Database schema must exist before API endpoints can be built").
-2. **Logical Grouping**: Propose a set of milestones (usually 3-5 per release) that represent a "step" toward the release goal.
-3. **Developer Consultation**: Present the proposed milestones to the developer. Ask: "Does this sequence make sense technically, or is there a more efficient way to build this?"
+1. **Research & Discovery**: Before grouping, proactively utilize autonomous research (e.g., `task` tool) to understand the technical complexity of the features.
+    - Create a brief "Milestone Research" summary for each potential milestone.
+    - Include short bullet points on technical requirements, potential blockers, and necessary dependencies.
+    - Save this research to `.jb/releases/[Version]/research-[Milestone-Name].md` to provide a knowledge base for future agents.
+2. **Dependency Analysis**: Analyze the research and the Technical Blueprint to identify natural technical dependencies (e.g., "Database schema must exist before API endpoints can be built").
+3. **Logical Grouping**: Propose a set of milestones (usually 3-5 per release) that represent a "step" toward the release goal.
+4. **Developer Consultation**: Present the proposed milestones and the research summaries to the developer. Ask: "Does this sequence make sense technically, or is there a more efficient way to build this?"
 
 ### Phase 2: Milestone Definition
 **Goal**: Define the specific "Definition of Done" (DoD) for each milestone.
