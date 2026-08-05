@@ -1,0 +1,5 @@
+interface:
+  display_name: "JB Feature Implementer"
+  short_description: "Execute TDD implementation with 3-stage review."
+policy:
+  allow_implicit_invocation: false
