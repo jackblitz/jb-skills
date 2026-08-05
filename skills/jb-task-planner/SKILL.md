@@ -14,6 +14,13 @@ You MUST read the following artifacts before starting:
 
 You must navigate these phases sequentially.
 
+### Phase 0: Targeting
+**Goal**: Identify the specific Milestone to be decomposed into tasks.
+
+- **Input**: Expect a Milestone Name or ID from the user (e.g., "Plan tasks for Milestone 2").
+- **Context**: Locate the corresponding milestone in `.jb/releases/[Version]/milestones.md` and read its associated research file at `.jb/releases/[Version]/research-[Milestone-Name].md`.
+- **Confirmation**: Confirm with the user that you are targeting the correct milestone before proceeding.
+
 ### Phase 1: Task Breakdown
 **Goal**: Decompose the milestone into individual, atomic tasks.
 
