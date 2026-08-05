@@ -9,7 +9,7 @@ You are the strategic architect. Your goal is to lead the user through the **Gen
 
 ## Documentation Policy
 
-Project documentation lives in the **GitHub Wiki**, never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The North Star is anchored as the wiki page `North-Star`, read and written via the helper scripts in `.jb/scripts/` (installed by `install.sh`; run `install.sh --scripts` if missing).
+Project documentation lives in **GitHub docs issues** (issues titled `Doc: <Name>`, labeled `docs`), never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The North Star is anchored as the pinned docs issue `Doc: North Star`, read and written via the helper scripts in `.jb/scripts/` (installed by `install.sh`; run `install.sh --scripts` if missing).
 
 ## Workflow
 
@@ -59,13 +59,12 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 4: Anchoring
 **Goal**: Permanently record the North Star as the project's source of truth.
 
-Save the final approved artifact to the GitHub Wiki page `North-Star`:
+Save the final approved artifact as the docs issue `Doc: North Star`:
 
-1. **Repo Check**: Confirm a GitHub repo exists (`gh repo view`). If not, offer to create one (`gh repo create`) — the wiki belongs to the repo.
-2. **Wiki Check**: The wiki must be initialized once by creating its first page in the browser (the helper script prints instructions if the wiki is missing). Enable it with `gh repo edit --enable-wiki` if needed.
-3. **Save**: Pipe the artifact into `.jb/scripts/github-wiki.sh put North-Star` and verify the reported page URL.
+1. **Repo Check**: Confirm a GitHub repo exists (`gh repo view`). If not, offer to create one (`gh repo create`) — the docs issues belong to the repo.
+2. **Save**: Pipe the artifact into `.jb/scripts/github-docs.sh put "North Star"` and verify the reported issue URL. The script pins the issue so it stays at the top of the issue list.
 
-All future skills read this page via `.jb/scripts/github-context.sh north-star`. Do NOT save the artifact as a file in the repo.
+All future skills read this doc via `.jb/scripts/github-context.sh north-star`. Do NOT save the artifact as a file in the repo, and never close the docs issue — it is the project's living North Star.
 
 ## Guidelines
 - **Stay High-Level**: Avoid getting bogged down in implementation details, specific libraries, or PRD-level feature lists.

@@ -2,6 +2,8 @@
 
 # github-context.sh — pull the right project documentation into an LLM's context.
 # One command per document so an agent can fetch exactly what it needs.
+# `task <n>` prints the ticket AND every doc it references, so an agent
+# starting from an issue number gets full context in a single call.
 
 set -euo pipefail
 
@@ -12,18 +14,22 @@ usage() {
 Usage: github-context.sh <command> [args]
 
 Commands:
-  north-star                Print the Project North Star (wiki: North-Star)
-  tech-stack                Print the Technical Blueprint (wiki: Tech-Stack)
-  research <Milestone>      Print a milestone's research (wiki: Research-<Milestone>)
+  north-star                Print the Project North Star (doc issue)
+  tech-stack                Print the Technical Blueprint (doc issue)
+  research <Milestone>      Print a milestone's research (doc issue)
   release-plan              Print the open release-plan tracking issue
   milestone <number|title>  Print a GitHub Milestone's title and description
-  task <issue-number>       Print a task issue (body includes doc links)
+  task <issue-number>       Print a task ticket PLUS every doc it references
   all                       Print north-star, tech-stack, and release-plan together
 EOF
 }
 
 section() {
     printf '\n===== %s =====\n\n' "$1"
+}
+
+print_issue() {
+    gh issue view "$1" --json title,body -q '"# " + .title + "\n\n" + .body'
 }
 
 release_plan() {
@@ -33,20 +39,20 @@ release_plan() {
         echo "Error: no open issue labeled 'release-plan'. Run jb-release-planner first." >&2
         exit 1
     fi
-    gh issue view "$num" --json title,body -q '"# " + .title + "\n\n" + .body'
+    print_issue "$num"
 }
 
 cmd=${1:-}
 case "$cmd" in
     north-star)
-        exec "$SCRIPT_DIR/github-wiki.sh" get North-Star
+        exec "$SCRIPT_DIR/github-docs.sh" get "North Star"
         ;;
     tech-stack)
-        exec "$SCRIPT_DIR/github-wiki.sh" get Tech-Stack
+        exec "$SCRIPT_DIR/github-docs.sh" get "Tech Stack"
         ;;
     research)
         milestone=${2:?Usage: github-context.sh research <Milestone>}
-        exec "$SCRIPT_DIR/github-wiki.sh" get "Research-${milestone// /-}"
+        exec "$SCRIPT_DIR/github-docs.sh" get "Research - ${milestone}"
         ;;
     release-plan)
         release_plan
@@ -56,13 +62,25 @@ case "$cmd" in
         ;;
     task)
         num=${2:?Usage: github-context.sh task <issue-number>}
-        gh issue view "$num" --json title,body -q '"# " + .title + "\n\n" + .body'
+        ticket=$(print_issue "$num")
+        section "TASK TICKET (#$num)"
+        printf '%s\n' "$ticket"
+        # Pull down every doc issue the ticket references (#N in the body
+        # that matches an open issue labeled 'docs').
+        doc_nums=$(gh issue list --label docs --state open --json number --jq '.[].number')
+        refs=$(printf '%s' "$ticket" | grep -oE '#[0-9]+' | tr -d '#' | sort -un)
+        for ref in $refs; do
+            if printf '%s\n' "$doc_nums" | grep -qx "$ref"; then
+                section "ATTACHED DOC (#$ref)"
+                print_issue "$ref"
+            fi
+        done
         ;;
     all)
         section "PROJECT NORTH STAR"
-        "$SCRIPT_DIR/github-wiki.sh" get North-Star
+        "$SCRIPT_DIR/github-docs.sh" get "North Star"
         section "TECHNICAL BLUEPRINT"
-        "$SCRIPT_DIR/github-wiki.sh" get Tech-Stack
+        "$SCRIPT_DIR/github-docs.sh" get "Tech Stack"
         section "RELEASE PLAN"
         release_plan
         ;;

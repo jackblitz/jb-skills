@@ -9,7 +9,7 @@ You are the Technical Lead. Your goal is to translate the vision from the Projec
 
 ## Documentation Policy
 
-Project documentation lives in the **GitHub Wiki**, never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The Technical Blueprint is anchored as the wiki page `Tech-Stack`, accessed via the helper scripts in `.jb/scripts/` (run `install.sh --scripts` if missing).
+Project documentation lives in **GitHub docs issues** (issues titled `Doc: <Name>`, labeled `docs`), never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The Technical Blueprint is anchored as the pinned docs issue `Doc: Tech Stack`, accessed via the helper scripts in `.jb/scripts/` (run `install.sh --scripts` if missing).
 
 ## Prerequisite
 Before starting, you MUST read the project's North Star: `.jb/scripts/github-context.sh north-star`. If the page does not exist, inform the user that `jb-compass` needs to be run first.
@@ -71,7 +71,7 @@ Once the stack is locked, synthesize the discussion into a **Technical Blueprint
 ### Phase 5: Anchoring
 **Goal**: Permanently record the technical direction.
 
-Save the final approved artifact to the GitHub Wiki page `Tech-Stack` by piping it into `.jb/scripts/github-wiki.sh put Tech-Stack`, and verify the reported page URL. All future skills read it via `.jb/scripts/github-context.sh tech-stack`. Do NOT save the artifact as a file in the repo.
+Save the final approved artifact as the docs issue `Doc: Tech Stack` by piping it into `.jb/scripts/github-docs.sh put "Tech Stack"`, and verify the reported issue URL (the script pins it). All future skills read it via `.jb/scripts/github-context.sh tech-stack`. Do NOT save the artifact as a file in the repo, and never close the docs issue.
 
 ## Guidelines
 - **Developer First**: Respect the developer's expertise. Your role is to provide research and a framework for decision-making, not to dictate the stack.

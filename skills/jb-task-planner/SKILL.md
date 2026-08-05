@@ -9,9 +9,9 @@ You are the Lead Developer. Your goal is to take a specific Milestone and produc
 
 ## GitHub Concept Mapping
 
-- **Input**: A GitHub Milestone (created by `jb-milestone-designer`) and its `Research-[Milestone-Name]` wiki page.
+- **Input**: A GitHub Milestone (created by `jb-milestone-designer`) and its `Doc: Research - [Milestone-Name]` docs issue.
 - **Output**: One **GitHub Issue per task** (assigned to the Milestone, with all doc links attached) plus committed **scaffolding code**: interface stubs and a failing ("Red") test suite.
-- **Not this skill**: No GitHub Milestones, no GitHub Releases, no working implementations — stub bodies stay unimplemented. No `.md` files in the repo (docs go to the wiki or issue bodies; only `README.md` and `CODING_STANDARDS.md` live in-repo).
+- **Not this skill**: No GitHub Milestones, no GitHub Releases, no working implementations — stub bodies stay unimplemented. No `.md` files in the repo (docs live as `docs`-labeled issues; only `README.md` and `CODING_STANDARDS.md` live in-repo).
 
 ## Prerequisites
 You MUST read the following before starting (helper scripts live in `.jb/scripts/`; run `install.sh --scripts` if missing):
@@ -30,7 +30,7 @@ You must navigate these phases sequentially. Phases 2 and 3 each require explici
 **Goal**: Identify the specific Milestone to be planned.
 
 - **Input**: Expect a Milestone Name or ID from the user (e.g., "Plan tasks for Milestone 2").
-- **Context**: Read the milestone (`.jb/scripts/github-context.sh milestone [name]`) and the research wiki page linked from its description (`.jb/scripts/github-context.sh research [name]`).
+- **Context**: Read the milestone (`.jb/scripts/github-context.sh milestone [name]`) and the research doc referenced from its description (`.jb/scripts/github-context.sh research [name]`).
 - **Confirmation**: Confirm with the user that you are targeting the correct milestone before proceeding.
 
 ### Phase 1: Task Breakdown
@@ -75,7 +75,13 @@ Use the `gh` CLI to create one issue per task:
     - **Context & Why**: The high-level implementation plan for the task.
     - **System Intersections**: Other components/features this task touches.
     - **Scaffolding**: Paths to the interface stub files and test files, and the Red PR link. The implementer's job is to make these exact tests pass.
-    - **Documentation Links**: The milestone's `Research-[Milestone-Name]` wiki page, plus the `North-Star` and `Tech-Stack` wiki pages (use `.jb/scripts/github-wiki.sh url [Page]`).
+    - **📚 Documentation**: Reference the attached docs by issue number so `github-context.sh task` pulls them down with the ticket — at minimum the milestone's research doc, e.g.:
+      ```
+      **📚 Documentation (pulled into context with this ticket)**
+      - Research: #[.jb/scripts/github-docs.sh number "Research - [Milestone-Name]"]
+      - North Star: #[.jb/scripts/github-docs.sh number "North Star"]
+      - Tech Stack: #[.jb/scripts/github-docs.sh number "Tech Stack"]
+      ```
 - **Labels**: Apply relevant labels (e.g., `todo`, `enhancement`).
 - **Milestone**: Associate the issue with the correct GitHub Milestone.
 

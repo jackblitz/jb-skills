@@ -21,7 +21,7 @@ GitHub's terminology overlaps with ours, so be precise about what this skill doe
 
 **CRITICAL**: A GitHub Release is an artifact of *shipped code* (a tag with release notes). At planning time there is no code to ship — for a first MVP a Release would be empty. Do NOT run `gh release create` in this skill under any circumstances. The plan lives in the tracking issue and Project board.
 
-**Documentation Policy**: Project docs live in the GitHub Wiki, never as `.md` files in the repo (only `README.md` and `CODING_STANDARDS.md` are permitted in-repo). Use the helper scripts in `.jb/scripts/` to pull docs into context (run `install.sh --scripts` if missing).
+**Documentation Policy**: Project docs live as GitHub docs issues (titled `Doc: <Name>`, labeled `docs`), never as `.md` files in the repo (only `README.md` and `CODING_STANDARDS.md` are permitted in-repo). Use the helper scripts in `.jb/scripts/` to pull docs into context (run `install.sh --scripts` if missing).
 
 ## Contextual Input
 You should use a combination of the following to determine the release scope:
@@ -89,8 +89,8 @@ Use this template for the tracking issue body:
 
 **📅 GitHub References**
 - Project Board: [Link]
-- North Star: [Wiki link from `.jb/scripts/github-wiki.sh url North-Star`]
-- Tech Stack: [Wiki link from `.jb/scripts/github-wiki.sh url Tech-Stack`]
+- North Star: #[number from `.jb/scripts/github-docs.sh number "North Star"`]
+- Tech Stack: #[number from `.jb/scripts/github-docs.sh number "Tech Stack"`]
 - Target Version (tag created at ship time by jb-release-executor): [Version]
 ---
 
@@ -101,6 +101,6 @@ Verify the issue and Project were created, then hand off: the next step is `jb-m
 - **Flexibility**: Be open to creating multiple small releases if that helps spread the work and reduce risk.
 - **No Task Creation**: Do NOT create individual GitHub issues for tasks in this skill. That is the responsibility of `jb-task-planner`. The only issue this skill creates is the single `release-plan` tracking issue.
 - **Alignment**: Ensure the release scope is a logical step toward the North Star vision.
-- **Developer Alignment**: Ensure the scope is technically feasible based on the Technical Blueprint (`Tech-Stack` wiki page).
-- **No Repo Docs**: Do not write any `.md` planning files into the repo — the tracking issue and wiki are the record.
+- **Developer Alignment**: Ensure the scope is technically feasible based on the Technical Blueprint (`Doc: Tech Stack` issue).
+- **No Repo Docs**: Do not write any `.md` planning files into the repo — the tracking issue and docs issues are the record.
 - **Tool-Driven**: Always confirm the GitHub Project and tracking issue exist after approval.
