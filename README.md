@@ -2,6 +2,16 @@
 
 JB Skills is a collection of specialized AI agents designed to lead a project from a vague idea to a production-ready release. This workflow emphasizes strategic alignment, technical rigor, and a strict Test-Driven Development (TDD) cycle.
 
+## ✅ Requirements
+
+These skills use GitHub as the single source of truth (docs issues, Milestones, Issues, Releases), so the following must be installed and available on your `PATH` for them to work:
+
+- **[git](https://git-scm.com/)** — branching, tagging, and pushing releases.
+- **[GitHub CLI (`gh`)](https://cli.github.com/)** — all planning and documentation operations. Must be authenticated: run `gh auth login` once and verify with `gh auth status`.
+- **[jq](https://jqlang.github.io/jq/)** — used by the helper scripts in `.jb/scripts/` to parse GitHub API responses.
+
+Your project also needs a GitHub repository (`gh repo view` should succeed from the project root) — `jb-compass` will offer to create one if it doesn't exist yet.
+
 ## 🛠 Installation
 
 To use these skills in your project, run the installer from the `jb-skills` directory:
