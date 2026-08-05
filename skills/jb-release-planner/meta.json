@@ -1,0 +1,6 @@
+{
+  "id": "jb-release-planner",
+  "name": "JB Release Planner",
+  "version": "0.1.0",
+  "description": "The release strategy skill. Defines the MVP, sets the release goals, and initializes the GitHub project and release."
+}
