@@ -1,64 +1,60 @@
 ---
 name: jb-feature-implementer
-description: The TDD implementation skill. Executes a 3-stage review cycle (Interface -> Tests -> Code) to implement features. Use when the user says "Run jb-feature-implementer".
+description: The execution skill. Takes a scaffolded task (interface stubs + failing tests from jb-task-planner) and fills in the implementation until the tests pass. Use when the user says "Run jb-feature-implementer".
 ---
 
-# JB Feature Implementer: TDD Implementation Cycle
+# JB Feature Implementer: Execution
 
-You are the Implementation Team. Your goal is to execute a specific task from the Task Plan using a strict, review-driven TDD process.
+You are the Implementation Team. Your goal is to take a task whose contract already exists — interface stubs and a failing test suite created by `jb-task-planner` — and **fill in the function bodies** until every test passes.
+
+## GitHub Concept Mapping
+
+- **Input**: A GitHub Issue (the task), which links to the interface stub files, test files, and the scaffolding ("Red") PR.
+- **Output**: The **"Green" Pull Request** — the implementation that makes the tests pass — linked to close the issue.
+- **Not this skill**: No new interfaces, no new tests (except with explicit user approval when a gap is found), no GitHub Releases or Milestones.
 
 ## Prerequisites
 Before starting, you MUST read:
-1. **The Task**: The specific task in `.jb/releases/[Version]/tasks-[Milestone-Name].md`.
-2. **Technical Blueprint**: `.jb/TECH_STACK.md`.
-3. **Coding Standards**: Check for `CODING_STANDARDS.md` in the project root. If it does not exist, you MUST ask the user: *"I noticed there is no CODING_STANDARDS.md file. Would you like to create one now to ensure consistent code across the project?"*
+1. **The Task Issue**: The GitHub issue for this task, including its "Context & Why", "System Intersections", and scaffolding file paths.
+2. **The Scaffolding**: The interface stub files and test files referenced by the issue.
+3. **Technical Blueprint**: `.jb/TECH_STACK.md`.
+4. **Coding Standards**: `CODING_STANDARDS.md` in the project root. If it does not exist, ask the user: *"I noticed there is no CODING_STANDARDS.md file. Would you like to create one now to ensure consistent code across the project?"*
 
 ## Workflow
 
-You must navigate these three distinct review stages. Each stage requires explicit user approval before proceeding.
+You must navigate these stages sequentially.
 
 ### Phase 0: Targeting
 **Goal**: Identify the specific Task to be implemented.
 
 - **Input**: Expect a Task ID or Issue Number from the user (e.g., "Implement Task #12" or "Work on the Login Endpoint task").
-- **Context**: Locate the task in `.jb/releases/[Version]/tasks-[Milestone-Name].md` and the corresponding GitHub issue.
-- **Confirmation**: Confirm the task's "Strategic Context" and "System Intersections" with the user before starting the TDD cycle.
+- **Context**: Read the GitHub issue and locate the interface stubs and tests it references.
+- **Confirmation**: Confirm the task's "Context & Why" and "System Intersections" with the user before starting.
 
-### Stage 1: Interface Design (Architect Review)
-**Goal**: Define the "What" without the "How".
+### Stage 1: Red Baseline Verification
+**Goal**: Prove the starting state is genuinely "Red".
 
-1. **Interface Definition**: Define only the **public** methods, variables, and interfaces.
-2. **Documentation**: Add detailed comments to every public member explaining:
-    - What the function does.
-    - The expected inputs and outputs.
-    - Any specific constraints or assumptions.
-3. **Review**: Present this interface to the user. 
-   - *Agent Role*: Act as the **Architect**.
-   - *Approval*: User must confirm the API surface is correct.
+1. **Run the Tests**: Execute the task's test suite and confirm the tests FAIL because the stubs are unimplemented (not because of setup errors or missing dependencies).
+2. **Contract Review**: Read the approved interfaces and tests as a fixed specification. If an interface or test looks wrong, incomplete, or untestable, STOP and raise it with the user — the contract was approved during `jb-task-planner`, so changing it requires explicit user approval.
 
-### Stage 2: Test-First Setup (QA Review)
-**Goal**: Create the verification layer.
-
-1. **Infrastructure**: Create any necessary fake classes, mocks, or stubs needed to isolate the feature.
-2. **Test Design**: Design and implement the test suite based on the requirements from the Task Plan and the approved Interface.
-3. **PR 1 (The Red PR)**: Create a Pull Request containing only the interface and the tests. 
-   - **Note**: These tests MUST fail because the implementation is missing.
-4. **Review**: Present the test cases to the user.
-   - *Agent Role*: Act as the **QA Engineer**.
-   - *Approval*: User must confirm the tests cover all requirements and edge cases.
-
-### Stage 3: Logic Implementation (Developer Review)
+### Stage 2: Logic Implementation
 **Goal**: Make the tests pass.
 
-1. **Internal Implementation**: Fill in the private logic and internal methods to satisfy the public interface and pass all tests.
-2. **PR 2 (The Green PR)**: Create a second Pull Request (or update the existing one) with the full implementation.
-3. **Verification**: Run the tests and prove they all pass.
-4. **Review**: Present the final implementation for code review.
+1. **Fill in the Stubs**: Implement the private logic and internal methods behind the public interface. Do not change public signatures.
+2. **Iterate to Green**: Run the tests continuously until every test passes.
+3. **Verification**: Run the FULL project test suite to confirm nothing else broke.
+
+### Stage 3: The Green PR (Developer Review)
+**Goal**: Deliver the implementation for review.
+
+1. **PR Creation**: Open the "Green" Pull Request (or update the scaffolding PR, per the project's workflow) containing the implementation. Reference the issue with `Closes #[Issue Number]`.
+2. **Proof**: Include the passing test output in the PR description.
+3. **Review**: Present the final implementation to the user.
    - *Agent Role*: Act as the **Software Developer**.
    - *Approval*: User must confirm the implementation is clean and follows `CODING_STANDARDS.md`.
 
 ## Guidelines
-- **Strict TDD**: Never write implementation code before the tests are approved.
-- **Interface Isolation**: In Stage 1, do not write any internal logic. Focus purely on the contract.
+- **Contract is Fixed**: The interfaces and tests from `jb-task-planner` are the specification. Never silently edit a test to make it pass or change a public signature — flag contract problems to the user instead.
+- **Fill, Don't Redesign**: Your job is the function bodies. Architectural decisions were made upstream; if one seems wrong, raise it rather than working around it.
 - **Consistency**: Always refer to `CODING_STANDARDS.md` for naming conventions, folder structure, and pattern usage.
-- **Atomic PRs**: Keep the Test PR and the Implementation PR separate if the workflow allows, to ensure the "Red" state is verified.
+- **Honest Green**: Only claim completion when the full test suite passes and you have shown the output.

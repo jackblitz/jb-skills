@@ -2,5 +2,5 @@
   "id": "jb-milestone-designer",
   "name": "JB Milestone Designer",
   "version": "0.1.0",
-  "description": "The milestone architecture skill. Breaks the Release Plan into executable milestones, integrating developer input and research."
+  "description": "The milestone architecture skill. Plans the full set of GitHub Milestones needed to complete the release, with research per milestone."
 }

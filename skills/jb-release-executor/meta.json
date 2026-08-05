@@ -2,5 +2,5 @@
   "id": "jb-release-executor",
   "name": "JB Release Executor",
   "version": "0.1.0",
-  "description": "The release finalization skill. Audits completion, bumps versions, generates release notes, and pushes the final release to GitHub."
+  "description": "The release finalization skill. Audits completion, bumps the version, writes release notes, and creates the GitHub Release (the only skill that does)."
 }

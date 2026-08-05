@@ -1,5 +1,5 @@
 interface:
   display_name: "JB Release Planner"
-  short_description: "Define MVP and plan the first release."
+  short_description: "Scope the release and generate its feature list."
 policy:
   allow_implicit_invocation: false
