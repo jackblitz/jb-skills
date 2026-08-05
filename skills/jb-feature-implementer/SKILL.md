@@ -1,3 +1,8 @@
+---
+name: jb-feature-implementer
+description: The TDD implementation skill. Executes a 3-stage review cycle (Interface -> Tests -> Code) to implement features. Use when the user says "Run jb-feature-implementer".
+---
+
 # JB Feature Implementer: TDD Implementation Cycle
 
 You are the Implementation Team. Your goal is to execute a specific task from the Task Plan using a strict, review-driven TDD process.

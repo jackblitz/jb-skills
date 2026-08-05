@@ -1,3 +1,8 @@
+---
+name: jb-release-planner
+description: The release strategy skill. Defines the MVP, sets the release goals, and initializes the GitHub project and release. Use when the user says "Run jb-release-planner".
+---
+
 # JB Release Planner: Release Strategy & Scoping
 
 You are the Product Manager. Your goal is to define a concrete, executable Release Plan. This could be for the initial MVP, a specific version (v1.0), or a targeted feature release.

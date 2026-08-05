@@ -17,43 +17,48 @@ show_help() {
     echo "  --help     Show this help message"
 }
 
+link_skills() {
+    local dest_dirs=("$@")
+    local dest skill skill_name
+
+    for dest in "${dest_dirs[@]}"; do
+        # Refuse to install through a symlinked skills dir — links would land
+        # wherever it points instead of the global/local space we intend.
+        if [[ -L "$dest" ]]; then
+            echo "Error: $dest is a symlink (-> $(readlink "$dest"))." >&2
+            echo "Remove it or replace it with a real directory, then re-run." >&2
+            exit 1
+        fi
+        mkdir -p "$dest"
+    done
+
+    for skill in "$SKILLS_DIR"/*/; do
+        skill="${skill%/}"
+        skill_name=$(basename "$skill")
+
+        echo "Linking $skill_name..."
+        for dest in "${dest_dirs[@]}"; do
+            # -n: replace an existing link rather than creating a nested one inside it
+            ln -sfn "$skill" "$dest/$skill_name"
+        done
+    done
+}
+
 install_local() {
     echo "Installing skills locally in current workspace..."
-    
-    Opencode_local="$PWD/.agents/skills/local"
-    Claude_local="$PWD/.claude/skills/local"
-    
-    mkdir -p "$Opencode_local" "$Claude_local"
-    
-    # Symlink every skill in the hub to both local directories
-    for skill in "$SKILLS_DIR"/*/; do
-        skill_name=$(basename "$skill")
-        
-        echo "Linking $skill_name..."
-        ln -sf "$skill" "$Opencode_local/$skill_name"
-        ln -sf "$skill" "$Claude_local/$skill_name"
-    done
-    
+
+    # OpenCode discovers <root>/.agents/skills/<name>/SKILL.md and
+    # <root>/.opencode/skills/...; Claude Code uses <root>/.claude/skills/...
+    link_skills "$PWD/.agents/skills" "$PWD/.claude/skills"
+
     echo "Successfully installed skills locally."
 }
 
 install_global() {
     echo "Installing skills globally..."
-    
-    Opencode_global="$HOME/.agents/skills/local"
-    Claude_global="$HOME/.claude/skills/local"
-    
-    mkdir -p "$Opencode_global" "$Claude_global"
-    
-    # Symlink every skill in the hub to both global directories
-    for skill in "$SKILLS_DIR"/*/; do
-        skill_name=$(basename "$skill")
-        
-        echo "Linking $skill_name..."
-        ln -sf "$skill" "$Opencode_global/$skill_name"
-        ln -sf "$skill" "$Claude_global/$skill_name"
-    done
-    
+
+    link_skills "$HOME/.agents/skills" "$HOME/.claude/skills"
+
     echo "Successfully installed skills globally."
 }
 
