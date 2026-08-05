@@ -38,32 +38,13 @@ You must navigate these phases sequentially.
 3. **Initialize Board**: Update the project board to reflect the current release status.
 
 ### Phase 4: Anchoring
-**Goal**: Permanently record the Release Plan in a structured format.
+**Goal**: Permanently record the Release Plan in GitHub.
 
-Save the final approved plan to `.jb/releases/[Version]/release-overview.md`. Ensure the directory exists. Use the following template:
+Instead of a local file, the GitHub Release and Project board serve as the source of truth.
+1. **Update Release Notes**: Ensure the `gh release edit` notes contain the finalized "Must-Haves" and "Success Criteria".
+2. **Finalize Project**: Ensure all features are correctly mapped to the GitHub Project board.
 
----
-# Release Overview: [Release Version/Name]
-
-**🎯 Primary Objective**
-(The one sentence goal for this release)
-
-**📦 Scope (Must-Haves)**
-- [ ] Feature A: (Brief description)
-- [ ] Feature B: (Brief description)
-
-**⏳ Deferred Features**
-- Feature C: (Why it's deferred)
-- Feature D: (Why it's deferred)
-
-**🏆 Release Success Criteria**
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-**📅 GitHub References**
-- Project: [Link]
-- Release: [Link]
----
+The final plan is anchored in the GitHub Release notes for this version.
 
 ## Guidelines
 - **Flexibility**: Be open to creating multiple small releases if that helps spread the work and reduce risk.
