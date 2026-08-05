@@ -1,0 +1,5 @@
+interface:
+  display_name: "JB Task Planner"
+  short_description: "Plan API surfaces, tests, and create GitHub tasks."
+policy:
+  allow_implicit_invocation: false
