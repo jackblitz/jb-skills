@@ -50,9 +50,7 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 4: Anchoring
 **Goal**: Permanently record the North Star as the project's source of truth.
 
-Save the final approved artifact to a file named `[Project Name].md` (using the project's actual name). 
-- **Location**: Place this in the **root of the project workspace** for maximum visibility.
-- **Exception**: If the project already has a dedicated documentation directory (e.g., `/docs`), place the file there instead to maintain project organization.
+Save the final approved artifact to a file named `[Project Name].md` (using the project's actual name) inside the `.jb/` folder at the root of the project workspace. Ensure the `.jb/` folder is created if it does not exist.
 
 This file will be referenced by all future skills to ensure alignment.
 
