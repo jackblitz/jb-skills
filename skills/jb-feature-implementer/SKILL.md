@@ -54,6 +54,7 @@ You must navigate these stages sequentially.
 
 ## Guidelines
 - **Contract is Fixed**: The interfaces and tests from `jb-task-planner` are the specification. Never silently edit a test to make it pass or change a public signature — flag contract problems to the user instead.
+- **Comment Discipline**: The interface comments (what/why/in/out) are part of the contract — do not rewrite, expand, or duplicate them while implementing. They only change if the function's behavior changes (which requires user approval). Inside function bodies, add a comment only where the logic cannot speak for itself; keep comments minimal but informative, and NEVER reference tickets, issue numbers, or future features in code comments.
 - **Fill, Don't Redesign**: Your job is the function bodies. Architectural decisions were made upstream; if one seems wrong, raise it rather than working around it.
 - **Consistency**: Always refer to `CODING_STANDARDS.md` for naming conventions, folder structure, and pattern usage.
 - **Honest Green**: Only claim completion when the full test suite passes and you have shown the output.
