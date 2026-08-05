@@ -12,6 +12,13 @@ You MUST read the following artifacts before starting:
 
 You must navigate these phases sequentially.
 
+### Phase 0: Targeting
+**Goal**: Identify exactly which release and milestone are being worked on.
+
+- **Input**: Expect a Milestone Name or ID from the user (e.g., "Work on Milestone 1").
+- **Context**: If no specific milestone is provided, scan `.jb/releases/[Version]/milestones.md` and ask the user which one to focus on.
+- **Scope**: If the goal is to *refine* an existing milestone, skip to Phase 2. If the goal is to *create* new ones, proceed to Phase 1.
+
 ### Phase 1: Milestone Identification
 **Goal**: Group the "Must-Have" features of the release into logical milestones.
 

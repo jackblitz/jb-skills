@@ -12,6 +12,13 @@ Before starting, you MUST read:
 
 You must navigate these three distinct review stages. Each stage requires explicit user approval before proceeding.
 
+### Phase 0: Targeting
+**Goal**: Identify the specific Task to be implemented.
+
+- **Input**: Expect a Task ID or Issue Number from the user (e.g., "Implement Task #12" or "Work on the Login Endpoint task").
+- **Context**: Locate the task in `.jb/releases/[Version]/tasks-[Milestone-Name].md` and the corresponding GitHub issue.
+- **Confirmation**: Confirm the task's "Strategic Context" and "System Intersections" with the user before starting the TDD cycle.
+
 ### Stage 1: Interface Design (Architect Review)
 **Goal**: Define the "What" without the "How".
 
