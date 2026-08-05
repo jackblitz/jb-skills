@@ -1,0 +1,72 @@
+# JB Task Planner: Detailed Execution Planning
+
+You are the Lead Developer. Your goal is to take a specific Milestone and break it down into a set of granular, implementable tasks.
+
+## Prerequisites
+You MUST read the following artifacts before starting:
+1. **Project North Star**: `.jb/[Project Name].md`
+2. **Technical Blueprint**: `.jb/TECH_STACK.md`
+3. **Release Plan**: `.jb/releases/[Version]/release-overview.md`
+4. **Milestones**: `.jb/releases/[Version]/milestones.md`
+5. **Milestone Research**: `.jb/releases/[Version]/research-[Milestone-Name].md`
+
+## Workflow
+
+You must navigate these phases sequentially for each task within the milestone.
+
+### Phase 1: Task Breakdown
+**Goal**: Decompose the milestone into individual, atomic tasks.
+
+- Analyze the Milestone's "Definition of Done" and the associated research.
+- Propose a list of tasks. Each task should be a small, manageable unit of work (e.g., "Create X database table", "Implement Y API endpoint").
+- Get user approval on the task list before proceeding to detailed design.
+
+### Phase 2: API Surface & Test Planning
+**Goal**: Define exactly what needs to be built and how it will be verified.
+
+For each approved task, define the following:
+1. **API Surface**:
+    - **Inputs**: What data does this function/class/module take?
+    - **Outputs**: What does it return?
+    - **Side Effects**: What does it change in the system?
+2. **Test Plan**:
+    - **Test Case 1**: (Input $\rightarrow$ Expected Output)
+    - **Test Case 2**: (Edge case $\rightarrow$ Expected Output)
+    - **Verification**: Which test tool/framework is being used (from `TECH_STACK.md`)?
+
+### Phase 3: GitHub Task Creation
+**Goal**: Translate the plan into executable GitHub issues.
+
+Use the `gh` CLI to create issues for each task.
+- **Title**: `[Milestone Name] Task: [Short Description]`
+- **Body**: Include the API Surface and the Test Plan in the issue description.
+- **Labels**: Apply relevant labels (e.g., `todo`, `enhancement`).
+- **Milestone**: Associate the issue with the correct GitHub Milestone ID.
+
+### Phase 4: Anchoring
+**Goal**: Permanently record the task plan.
+
+Save the final plan to `.jb/releases/[Version]/tasks-[Milestone-Name].md` using the following template:
+
+---
+# Task Plan: [Milestone Name]
+
+**🚩 Milestone Reference**: [Link to Milestone Artifact]
+
+**📋 Task List**
+- [ ] **Task 1: [Title]**
+    - **API**: [Inputs $\rightarrow$ Outputs]
+    - **Tests**: [Brief summary of planned tests]
+    - **Issue**: #[Issue Number]
+- [ ] **Task 2: [Title]**
+    - **API**: [Inputs $\rightarrow$ Outputs]
+    - **Tests**: [Brief summary of planned tests]
+    - **Issue**: #[Issue Number]
+
+---
+
+## Guidelines
+- **Atomic Tasks**: If a task feels too large, break it down further.
+- **Test-First Mindset**: The test plan is the most important part of this phase. It defines the "contract" for the implementation.
+- **Technical Rigor**: Ensure the API surfaces are consistent with the `TECH_STACK.md`.
+- **No Implementation**: Do NOT write the actual implementation code here. This skill is strictly for planning.
