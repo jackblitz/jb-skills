@@ -68,7 +68,7 @@ For each milestone, define:
 - **Complete Coverage**: The milestone set must account for the ENTIRE Must-Have feature list. A release is only complete when all its milestones are complete.
 - **Right-Sized Count**: The number of milestones comes from the work, not a quota. A tiny MVP might be one milestone; a complex release might be seven.
 - **Incremental Value**: Each milestone should, if possible, provide some form of incremental value or risk reduction.
-- **Technical Grounding**: Do not plan milestones in a vacuum. Always refer back to the `TECH_STACK.md` to ensure the sequence is technically sound.
+- **Technical Grounding**: Do not plan milestones in a vacuum. Always refer back to the `Doc: Tech Stack` issue (`.jb/scripts/github-context.sh tech-stack`) to ensure the sequence is technically sound.
 - **User-Driven Pace**: The user decides the final groupings and the "Definition of Done".
 - **No Task Planning**: Do NOT plan individual tasks, interfaces, or tests here. That is the responsibility of `jb-task-planner`.
 - **No GitHub Releases**: Never create or edit a GitHub Release — that happens only at ship time via `jb-release-executor`.
