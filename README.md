@@ -27,7 +27,7 @@ This workflow must be followed sequentially. Each stage produces the "Source of 
 | Stage | Skill | Trigger | Goal | Source of Truth |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. Vision** | `jb-compass` | `"Run jb-compass"` | Align on core purpose & UX | GitHub Issue (docs tag) |
-| **2. Blueprint** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | GitHub Issue (blueprint tag) |
+| **2. Tech Stack** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | GitHub Issue (tech_stack tag) |
 | **3. Strategy** | `jb-release-planner` | `"Run jb-release-planner"` | Scope MVP & setup GitHub Project | GitHub Release / Project |
 | **4. Architecture** | `jb-milestone-designer` | `"Run jb-milestone-designer"` | Break release into milestones | GitHub Milestones |
 | **5. Tactics** | `jb-task-planner` | `"Run jb-task-planner for [Milestone]"` | Plan API surfaces & GitHub Issues | GitHub Issues |
@@ -69,5 +69,5 @@ The release executor audits the completed GitHub issues against the release plan
 ---
 
 ## 📂 Project Structure
-- `.jb/`: (Legacy) previously contained the technical blueprint.
+- `.jb/`: (Legacy) previously contained the tech stack.
 - GitHub: Serves as the source of truth for all planning, task tracking, and release management.

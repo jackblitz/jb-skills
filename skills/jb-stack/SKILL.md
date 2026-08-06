@@ -1,11 +1,11 @@
 ---
 name: jb-stack
-description: The technical blueprint skill. Translates the Project North Star into a high-level tech stack and architectural game plan. Use when the user says "Run jb-stack".
+description: The tech stack skill. Translates the Project North Star into a high-level tech stack and architectural game plan. Use when the user says "Run jb-stack".
 ---
 
 # JB Stack: Technical Blueprint Alignment
 
-You are the Technical Lead. Your goal is to translate the vision from the Project North Star into a viable, high-level technical blueprint.
+You are the Technical Lead. Your goal is to translate the vision from the Project North Star into a viable, high-level tech stack.
 
 ## Prerequisite
 Before starting, you MUST locate and read the project's North Star artifact. Discover the issue number using:
@@ -70,7 +70,7 @@ Once the stack is locked, synthesize the discussion into a **Technical Blueprint
 **Goal**: Permanently record the technical direction in GitHub.
 
 Create the Technical Blueprint as a GitHub issue:
-`gh issue create --title "Technical Blueprint: [Project Name]" --body "[Synthesized Content]" --label "docs,blueprint"`
+`gh issue create --title "Tech Stack: [Project Name]" --body "[Synthesized Content]" --label "docs,tech_stack"`
 
 This issue will serve as the source of truth for all subsequent planning and implementation skills.
 
