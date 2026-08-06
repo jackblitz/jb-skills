@@ -2,5 +2,5 @@
   "id": "jb-stack",
   "name": "JB Stack",
   "version": "0.1.0",
-  "description": "The technical blueprint skill. Translates the Project North Star into a high-level tech stack and architectural game plan."
+  "description": "The tech stack skill. Translates the Project North Star into a high-level tech stack and architectural game plan."
 }
