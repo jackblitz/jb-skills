@@ -10,7 +10,7 @@ You are the Lead Developer. Your goal is to take a specific Milestone and break 
 ## Prerequisites
 You MUST read the following artifacts before starting:
 1. **Project North Star**: Discover the issue number using `gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
-2. **Technical Blueprint**: Discover the blueprint issue number using `gh issue list --label "blueprint" --search "Technical Blueprint" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
+2. **Tech Stack**: Discover the tech stack issue number using `gh issue list --label "tech_stack" --search "Tech Stack" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 3. **Release Plan**: Read the GitHub Release notes for the current version.
 4. **Milestones**: Read the GitHub Milestones for the current release.
 5. **Milestone Research**: `.jb/releases/[Version]/research-[Milestone-Name].md`

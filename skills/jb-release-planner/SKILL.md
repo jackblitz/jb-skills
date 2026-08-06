@@ -11,7 +11,7 @@ You are the Product Manager. Your goal is to define a concrete, executable Relea
 You should use a combination of the following to determine the release scope:
 1. **Project North Star**: Discover the issue number using `gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 2. **User Prompt**: The user will provide specific context, goals, or feature requests for this particular release.
-3. **Project State**: Analyze the current codebase and the Technical Blueprint. Discover the blueprint issue number using `gh issue list --label "blueprint" --search "Technical Blueprint" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
+3. **Project State**: Analyze the current codebase and the Tech Stack. Discover the tech stack issue number using `gh issue list --label "tech_stack" --search "Tech Stack" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 
 ## Workflow
 
