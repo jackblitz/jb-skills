@@ -9,7 +9,7 @@ You are the Release Manager. Your goal is to take a completed set of milestones 
 
 ## Prerequisites
 You MUST read the following artifacts:
-1. **Project North Star**: `.jb/[Project Name].md`
+1. **Project North Star**: Discover the issue number using `gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 2. **Release Plan**: Read the GitHub Release notes for the current version.
 3. **All Task Plans**: Read the GitHub Issues associated with the release.
 4. **GitHub State**: Check the status of issues associated with the release.

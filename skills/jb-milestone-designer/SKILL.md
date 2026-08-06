@@ -9,7 +9,7 @@ You are the Technical Program Manager. Your goal is to take a finalized Release 
 
 ## Prerequisites
 You MUST read the following artifacts before starting:
-1. **Project North Star**: `.jb/[Project Name].md`
+1. **Project North Star**: Discover the issue number using `gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 2. **Technical Blueprint**: `.jb/TECH_STACK.md`
 3. **Release Plan**: Read the GitHub Release notes for the current version.
 
