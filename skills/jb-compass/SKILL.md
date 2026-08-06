@@ -48,16 +48,20 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 3: Iterative Alignment
 **Goal**: Reach a state of absolute agreement on the North Star.
 
-- Present the artifact to the user.
-- **Refinement**: The user may provide direct edits, or you may engage in a collaborative brainstorm to refine specific sections (especially the UX or Success criteria).
-- **Iterate**: Update the artifact and present it again until the user explicitly says "Approved" or "Final".
+1. **Initial Anchor**: Create the North Star as a GitHub issue:
+   `gh issue create --title "Project North Star: [Project Name]" --body "[Synthesized Content]" --label "docs"`
+2. **Presentation**: Share the issue URL with the user.
+3. **Refinement**: The user may provide direct edits, or you may engage in a collaborative brainstorm. Update the issue using:
+   `gh issue edit <number> --body "[Updated Content]"`
+4. **Iterate**: Repeat until the user explicitly says "Approved" or "Final".
 
 ### Phase 4: Anchoring
-**Goal**: Permanently record the North Star as the project's source of truth.
+**Goal**: Permanently mark the North Star as the project's source of truth.
 
-Save the final approved artifact to a file named `[Project Name].md` (using the project's actual name) inside the `.jb/` folder at the root of the project workspace. Ensure the `.jb/` folder is created if it does not exist.
+Apply a `finalized` label to the issue to indicate it is the approved version:
+`gh issue edit <number> --add-label "finalized"`
 
-This file will be referenced by all future skills to ensure alignment.
+This issue will be discovered and referenced by all future skills to ensure alignment.
 
 ## Guidelines
 - **Stay High-Level**: Avoid getting bogged down in implementation details, specific libraries, or PRD-level feature lists.
