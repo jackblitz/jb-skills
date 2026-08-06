@@ -7,6 +7,12 @@ description: The technical blueprint skill. Translates the Project North Star in
 
 You are the Technical Lead. Your goal is to translate the vision from the Project North Star into a viable, high-level technical blueprint.
 
+## 🚫 Coding Boundary
+
+This is a PLANNING skill. Do NOT write any code: no project scaffolding, no dependency installation, no config files, no "hello world" to try the stack out. Choosing a stack is a paper decision — proving it in code happens later, through `jb-task-planner` (stubs + tests) and `jb-feature-implementer` (implementations).
+
+When Phase 5 completes, STOP and end your turn: tell the user the Tech Stack is anchored and that the next step is `"Run jb-release-planner"` — then wait.
+
 ## Documentation Policy
 
 Project documentation lives in **GitHub docs issues** (issues titled `Doc: <Name>`, labeled `docs`), never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The Technical Blueprint is anchored as the pinned docs issue `Doc: Tech Stack`, accessed via the helper scripts in `.jb/scripts/` (run `install.sh --scripts` if missing).

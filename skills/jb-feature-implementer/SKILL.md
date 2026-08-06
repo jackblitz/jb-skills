@@ -7,6 +7,10 @@ description: The execution skill. Takes a scaffolded task (interface stubs + fai
 
 You are the Implementation Team. Your goal is to take a task whose contract already exists — interface stubs and a failing test suite created by `jb-task-planner` — and **fill in the function bodies** until every test passes.
 
+## 🚫 Coding Boundary
+
+This is the ONLY skill that writes implementation code — and only for the one targeted task, only after its scaffolding exists. If the task has no interface stubs and failing tests yet, STOP: it has not been through `jb-task-planner`, and you must not invent the contract yourself. Do not implement neighboring tasks, "quick wins," or features you noticed along the way — one issue per run. When Stage 3 completes, STOP and end your turn: tell the user the Green PR is ready for review — then wait.
+
 ## GitHub Concept Mapping
 
 - **Input**: A GitHub Issue (the task), which links to the interface stub files, test files, and the scaffolding ("Red") PR.

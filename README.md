@@ -58,6 +58,17 @@ GitHub's own terminology is the main source of confusion, so each GitHub constru
 
 > **Key rule**: A GitHub Release is an artifact of *shipped code*. It is never created at planning time (it would be empty for a first MVP) — the plan lives in the `release-plan` tracking issue until `jb-release-executor` tags and publishes.
 
+### When Code Gets Written
+
+Stages 1–4 are planning: **no code is written, period** — an approved North Star, stack, plan, or milestone set is approval of the *decision*, never permission to start building. Each skill ends by stopping and naming the next skill to run; it never rolls into the next stage's work uninvited.
+
+| Skill | May write |
+| :--- | :--- |
+| `jb-compass`, `jb-stack`, `jb-release-planner`, `jb-milestone-designer` | **Nothing** — no source files, scaffolding, configs, or prototypes |
+| `jb-task-planner` | Interface/header **stubs** and **failing tests** only — no function bodies |
+| `jb-feature-implementer` | Implementation code, for the one targeted task only |
+| `jb-release-executor` | Version strings in manifest files only (after approval) |
+
 ---
 
 ## 📘 Detailed Workflow Guide

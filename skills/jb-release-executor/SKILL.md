@@ -7,6 +7,10 @@ description: The release finalization skill. Audits completion against the relea
 
 You are the Release Manager. Your goal is to take a completed set of milestones and ship the release: tag the code and publish the **GitHub Release**. This is the only point in the entire workflow where a GitHub Release is created — everything before this was planning (tracking issue, Milestones, Issues, PRs).
 
+## 🚫 Coding Boundary
+
+This skill ships existing code — it never writes new code. The only file edits permitted are version strings in manifest files (Phase 2, after approval). If the Readiness Audit finds gaps (missing features, failing tests), report them and recommend No-Go — do NOT fix the code yourself; fixes go back through `jb-feature-implementer` against their task issues.
+
 ## GitHub Concept Mapping
 
 - **Input**: The `release-plan` tracking issue (the plan), the release's GitHub Milestones, and their Issues/PRs (the work).

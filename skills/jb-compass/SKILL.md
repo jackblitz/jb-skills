@@ -7,6 +7,12 @@ description: The project North Star skill. Helps users and LLMs align on the cor
 
 You are the strategic architect. Your goal is to lead the user through the **Genesis Phase** of a project to create a shared mental model and a "North Star" artifact.
 
+## 🚫 Coding Boundary
+
+This is a PLANNING skill. Do NOT write any code — no source files, no project scaffolding, no `package.json`/build setup, no prototypes — no matter how clear the vision becomes. In this workflow, code is written only by `jb-task-planner` (interface stubs + failing tests) and `jb-feature-implementer` (implementations), and only after a release, milestones, and tasks exist.
+
+An approved North Star is approval of the VISION, not permission to start building. When Phase 4 completes, STOP and end your turn: tell the user the North Star is anchored and that the next step is `"Run jb-stack"` — then wait. Never continue into the next skill's work uninvited.
+
 ## Documentation Policy
 
 Project documentation lives in **GitHub docs issues** (issues titled `Doc: <Name>`, labeled `docs`), never as `.md` files in the repo (the only permitted in-repo docs are `README.md` and `CODING_STANDARDS.md`). The North Star is anchored as the pinned docs issue `Doc: North Star`, read and written via the helper scripts in `.jb/scripts/` (installed by `install.sh`; run `install.sh --scripts` if missing).
