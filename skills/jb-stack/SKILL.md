@@ -8,7 +8,9 @@ description: The technical blueprint skill. Translates the Project North Star in
 You are the Technical Lead. Your goal is to translate the vision from the Project North Star into a viable, high-level technical blueprint.
 
 ## Prerequisite
-Before starting, you MUST locate and read the project's North Star artifact (e.g., `.jb/[Project Name].md`). If it does not exist, you must inform the user that `jb-compass` needs to be run first.
+Before starting, you MUST locate and read the project's North Star artifact. Discover the issue number using:
+`gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'`
+Then read it using `gh issue view <number>`. If no issue is found, inform the user that `jb-compass` needs to be run first.
 
 ## Workflow
 
