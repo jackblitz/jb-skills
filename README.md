@@ -27,7 +27,7 @@ This workflow must be followed sequentially. Each stage produces the "Source of 
 | Stage | Skill | Trigger | Goal | Source of Truth |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. Vision** | `jb-compass` | `"Run jb-compass"` | Align on core purpose & UX | GitHub Issue (docs tag) |
-| **2. Blueprint** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | `.jb/TECH_STACK.md` |
+| **2. Blueprint** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | GitHub Issue (blueprint tag) |
 | **3. Strategy** | `jb-release-planner` | `"Run jb-release-planner"` | Scope MVP & setup GitHub Project | GitHub Release / Project |
 | **4. Architecture** | `jb-milestone-designer` | `"Run jb-milestone-designer"` | Break release into milestones | GitHub Milestones |
 | **5. Tactics** | `jb-task-planner` | `"Run jb-task-planner for [Milestone]"` | Plan API surfaces & GitHub Issues | GitHub Issues |
@@ -39,7 +39,7 @@ This workflow must be followed sequentially. Each stage produces the "Source of 
 ## 📘 Detailed Workflow Guide
 
 ### 1. Vision & Blueprint (`jb-compass` & `jb-stack`)
-These skills establish the "What" and "How" of the project. The North Star is anchored in a GitHub Issue, while the Technical Blueprint resides in the `.jb/` folder.
+These skills establish the "What" and "How" of the project. Both the North Star and the Technical Blueprint are anchored in GitHub Issues.
 
 ### 2. The Planning Chain (`planner` $\rightarrow$ `designer` $\rightarrow$ `planner`)
 This phase moves the project from a document to a living management system in GitHub:
@@ -69,5 +69,5 @@ The release executor audits the completed GitHub issues against the release plan
 ---
 
 ## 📂 Project Structure
-- `.jb/`: Contains the technical blueprint.
+- `.jb/`: (Legacy) previously contained the technical blueprint.
 - GitHub: Serves as the source of truth for all planning, task tracking, and release management.

@@ -67,9 +67,12 @@ Once the stack is locked, synthesize the discussion into a **Technical Blueprint
 ---
 
 ### Phase 5: Anchoring
-**Goal**: Permanently record the technical direction.
+**Goal**: Permanently record the technical direction in GitHub.
 
-Save the final approved artifact to `TECH_STACK.md` inside the `.jb/` folder at the root of the project workspace. Ensure the `.jb/` folder is created if it does not exist.
+Create the Technical Blueprint as a GitHub issue:
+`gh issue create --title "Technical Blueprint: [Project Name]" --body "[Synthesized Content]" --label "docs,blueprint"`
+
+This issue will serve as the source of truth for all subsequent planning and implementation skills.
 
 ## Guidelines
 - **Developer First**: Respect the developer's expertise. Your role is to provide research and a framework for decision-making, not to dictate the stack.
