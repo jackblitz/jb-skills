@@ -11,9 +11,10 @@ You are the Lead Developer. Your goal is to take a specific Milestone and break 
 You MUST read the following artifacts before starting:
 1. **Project North Star**: Discover the issue number using `gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 2. **Tech Stack**: Discover the tech stack issue number using `gh issue list --label "tech_stack" --search "Tech Stack" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
-3. **Release Plan**: Read the GitHub Release notes for the current version.
-4. **Milestones**: Read the GitHub Milestones for the current release.
-5. **Milestone Research**: `.jb/releases/[Version]/research-[Milestone-Name].md`
+3. **Release Plan**: Discover the release plan issue number using `gh issue list --label "release-plan" --search "Release Plan" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
+4. **Milestone Spec**: Discover the milestone spec issue number using `gh issue list --label "milestone-spec" --search "[Milestone Name]" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
+5. **Milestone Research**: Discover any research issues using `gh issue list --label "milestone-research" --search "[Milestone Name]"`.
+
 
 ## Workflow
 
@@ -23,7 +24,7 @@ You must navigate these phases sequentially.
 **Goal**: Identify the specific Milestone to be decomposed into tasks.
 
 - **Input**: Expect a Milestone Name or ID from the user (e.g., "Plan tasks for Milestone 2").
-- **Context**: Locate the corresponding milestone in `.jb/releases/[Version]/milestones.md` and read its associated research file at `.jb/releases/[Version]/research-[Milestone-Name].md`.
+- **Context**: Locate the corresponding `milestone-spec` issue using `gh issue list --label "milestone-spec" --search "[Milestone Name]"`. Read this spec to understand the UX Outcome and Feature Orchestration.
 - **Confirmation**: Confirm with the user that you are targeting the correct milestone before proceeding.
 
 ### Phase 1: Task Breakdown
@@ -48,7 +49,7 @@ Use the `gh` CLI to create issues for each task.
 - **Title**: `[Milestone Name] Task: [Short Description]`
 - **Body**: Include the Strategic Context (the "How" and "Why") and the System Intersections in the issue description.
 - **Labels**: Apply relevant labels (e.g., `todo`, `enhancement`).
-- **Milestone**: Associate the issue with the correct GitHub Milestone ID.
+- **Milestone**: Associate the issue with the `Native Milestone` for this specific milestone (created in `jb-milestone-designer`) using `gh issue edit <number> --milestone "[Milestone Name]"`.
 
 ### Phase 4: Anchoring
 **Goal**: Permanently record the task plan in GitHub.
@@ -62,5 +63,5 @@ The final plan is anchored in the GitHub Issues for this milestone.
 ## Guidelines
 - **Atomic Tasks**: If a task feels too large, break it down further.
 - **Big Picture Focus**: Do NOT define API surfaces (inputs/outputs) or write test cases here. That is the responsibility of the feature implementer during the TDD cycle.
-- **Technical Rigor**: Ensure the tasks are logically sequenced based on the Technical Blueprint.
+- **Technical Rigor**: Ensure the tasks are logically sequenced based on the Tech Stack. If you discover a fundamental technical flaw that makes the Milestone Spec impossible, request a stack revision: "I've discovered a technical blocker that requires a revision of the Tech Stack. Shall we run `jb-stack` to address this?"
 - **No Implementation**: Do NOT write the actual implementation code here. This skill is strictly for strategic planning.
