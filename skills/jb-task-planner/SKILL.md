@@ -49,7 +49,7 @@ Use the `gh` CLI to create issues for each task.
 - **Title**: `[Milestone Name] Task: [Short Description]`
 - **Body**: Include the Strategic Context (the "How" and "Why") and the System Intersections in the issue description.
 - **Labels**: Apply relevant labels (e.g., `todo`, `enhancement`).
-- **Milestone**: Associate the issue with the correct GitHub Milestone ID.
+- **Milestone**: Associate the issue with the `Native Milestone` for this specific milestone (created in `jb-milestone-designer`) using `gh issue edit <number> --milestone "[Milestone Name]"`.
 
 ### Phase 4: Anchoring
 **Goal**: Permanently record the task plan in GitHub.

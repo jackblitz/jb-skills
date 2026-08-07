@@ -59,8 +59,9 @@ Use the `gh` CLI to:
     - **✅ Validation**: [Validation from Phase 2]
     - **🔗 Native Milestone**: (Link to the native milestone created in the next step)
 
-2. **Create Native Milestone**: `gh milestone create [Milestone Name] --description "Detailed spec: #[Issue Number from Step 1]"`
-3. **Link to Release**: Ensure the milestones are logically associated with the current release version.
+2. **Create Native Milestone**: `gh milestone create [Milestone Name] --description "Strategic milestone for [Milestone Name]. Focuses on [UX Outcome]. Detailed Specification: Issue #[Issue Number from Step 1]"`
+3. **Link to Release**: Assign the Milestone Spec issue to the overall Release Milestone to ensure it's tracked in the main release:
+   `gh issue edit <spec_issue_number> --milestone "Release [Version/Name]"`
 
 ### Phase 4: Anchoring
 **Goal**: Permanently record the milestone structure in GitHub.
