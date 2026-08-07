@@ -48,20 +48,23 @@ Once you have a clear mental model, synthesize the conversation into a **North S
 ### Phase 3: Iterative Alignment
 **Goal**: Reach a state of absolute agreement on the North Star.
 
-1. **Initial Anchor**: Create the North Star as a GitHub issue:
+**IMPORTANT**: You must not present the North Star as a text block. It MUST be anchored in GitHub before the user sees it.
+
+1. **Initial Anchor**: Immediately create the North Star as a GitHub issue:
    `gh issue create --title "Project North Star: [Project Name]" --body "[Synthesized Content]" --label "docs"`
-2. **Presentation**: Share the issue URL with the user.
-3. **Refinement**: The user may provide direct edits, or you may engage in a collaborative brainstorm. Update the issue using:
+2. **Presentation**: Share the **issue URL** with the user. This URL is the only valid way to present the artifact.
+3. **Refinement**: The user may provide direct edits. Update the issue using:
    `gh issue edit <number> --body "[Updated Content]"`
 4. **Iterate**: Repeat until the user explicitly says "Approved" or "Final".
 
 ### Phase 4: Anchoring
 **Goal**: Permanently mark the North Star as the project's source of truth.
 
-Apply a `finalized` label to the issue to indicate it is the approved version:
-`gh issue edit <number> --add-label "finalized"`
+1. **Finalize**: Apply a `finalized` label to the issue:
+   `gh issue edit <number> --add-label "finalized"`
+2. **Hand-off**: Confirm completion of the North Star phase and ask the user: "The North Star is now finalized in GitHub. Shall we move to the Technical Blueprint (jb-stack)?"
 
-This issue will be discovered and referenced by all future skills to ensure alignment.
+**Do NOT proceed to any other skill or implementation phase until Phase 4 is fully completed and the user has confirmed the hand-off.**
 
 ## Guidelines
 - **Stay High-Level**: Avoid getting bogged down in implementation details, specific libraries, or PRD-level feature lists.
