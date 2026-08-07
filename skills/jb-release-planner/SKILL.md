@@ -42,7 +42,7 @@ You must navigate these phases sequentially.
 **Goal**: Create the overarching release milestone in GitHub.
 
 1. **Create Release Milestone**: Create a high-level milestone that represents the entire release:
-   `gh milestone create "Release [Version/Name]" --description "Umbrella milestone for the [Version/Name] release. Source of truth: Release Plan Issue #[Issue Number]"`
+   `gh milestone create "Release [Version/Name]" --description "Main release milestone for [Version/Name]. Tracks all high-level deliverables. Source of Truth: Release Plan Issue #[Issue Number]"`
 2. **Mark Finalized**: Apply a `finalized` label to the Release Plan issue:
    `gh issue edit <number> --add-label "finalized"`
 
