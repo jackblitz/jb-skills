@@ -1,0 +1,6 @@
+{
+  "id": "jb-task-implementer",
+  "name": "JB Task Implementer",
+  "version": "0.1.0",
+  "description": "The TDD implementation skill. Executes a review-driven TDD cycle to implement specific tasks based on the technical specification."
+}

@@ -29,9 +29,9 @@ This workflow must be followed sequentially. Each stage produces the "Source of 
 | **1. Vision** | `jb-compass` | `"Run jb-compass"` | Align on core purpose & UX | GitHub Issue (docs tag) |
 | **2. Tech Stack** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | GitHub Issue (tech_stack tag) |
 | **3. Strategy** | `jb-release-planner` | `"Run jb-release-planner"` | Scope MVP & setup GitHub Project | GitHub Release / Project |
-| **4. Architecture** | `jb-milestone-designer` | `"Run jb-milestone-designer"` | Break release into milestones | GitHub Milestones |
+| **4. Architecture** | `jb-feature-designer` | `"Run jb-feature-designer"` | Break release into features | GitHub Issues |
 | **5. Tactics** | `jb-task-planner` | `"Run jb-task-planner for [Milestone]"` | Plan API surfaces & GitHub Issues | GitHub Issues |
-| **6. Execution** | `jb-feature-implementer` | `"Run jb-feature-implementer for [Task]"` | TDD cycle (Interface $\rightarrow$ Test $\rightarrow$ Code) | GitHub Pull Requests |
+| **6. Execution** | `jb-task-implementer` | `"Run jb-task-implementer for [Task]"` | TDD cycle (Interface $\rightarrow$ Test $\rightarrow$ Code) | GitHub Pull Requests |
 | **7. Delivery** | `jb-release-executor` | `"Run jb-release-executor"` | Audit, Bump Version & Final Release | GitHub Release / Tags |
 
 ---
@@ -44,10 +44,10 @@ These skills establish the "What" and "How" of the project. Both the North Star 
 ### 2. The Planning Chain (`planner` $\rightarrow$ `designer` $\rightarrow$ `planner`)
 This phase moves the project from a document to a living management system in GitHub:
 - **Release Planner**: Defines the scope and creates the GitHub Release and Project.
-- **Milestone Designer**: Groups features into strategic milestones with "Definition of Done" (DoD) and performs technical research.
+- **Feature Designer**: Groups deliverables into high-level features with "Definition of Done" (DoD) and performs technical research.
 - **Task Planner**: Breaks milestones into atomic tasks, defines the strategic context (the "How" and "Why"), and creates GitHub Issues.
 
-### 3. The Implementation Cycle (`jb-feature-implementer`)
+### 3. The Implementation Cycle (`jb-task-implementer`)
 Each task is implemented using a strict **3-Stage Review Process**:
 
 1.  **Stage 1: Interface Design (Architect Review)**

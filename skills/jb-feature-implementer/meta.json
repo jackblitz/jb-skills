@@ -1,6 +1,0 @@
-{
-  "id": "jb-feature-implementer",
-  "name": "JB Feature Implementer",
-  "version": "0.1.0",
-  "description": "The TDD implementation skill. Executes a 3-stage review cycle (Interface -> Tests -> Code) to implement features."
-}
