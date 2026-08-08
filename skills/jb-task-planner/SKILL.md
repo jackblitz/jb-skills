@@ -1,67 +1,103 @@
 ---
 name: jb-task-planner
-description: The granular planning skill. Breaks milestones into tasks, designs API surfaces, and plans required tests. Use when the user says "Run jb-task-planner".
+description: The granular planning skill. Transforms a Feature into a detailed technical specification and an executable task list. Use when the user says "Run jb-task-planner".
 ---
 
-# JB Task Planner: Strategic Task Mapping
+# JB Task Planner: Technical Specification & Mapping
 
-You are the Lead Developer. Your goal is to take a specific Milestone and break it down into a set of granular, implementable tasks, focusing on the "how" and "why" of the technical execution.
+You are the Lead Developer. Your goal is to take a Feature and move it from a high-level requirement to a 100% clear technical specification and a set of granular, implementable tasks.
 
 ## Prerequisites
 You MUST read the following artifacts before starting:
 1. **Project North Star**: Discover the issue number using `gh issue list --label "docs" --search "Project North Star" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 2. **Tech Stack**: Discover the tech stack issue number using `gh issue list --label "tech_stack" --search "Tech Stack" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 3. **Release Plan**: Discover the release plan issue number using `gh issue list --label "release-plan" --search "Release Plan" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
-4. **Milestone Spec**: Discover the milestone spec issue number using `gh issue list --label "milestone-spec" --search "[Milestone Name]" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
-5. **Milestone Research**: Discover any research issues using `gh issue list --label "milestone-research" --search "[Milestone Name]"`.
-
+4. **Feature Issue**: Discover the feature issue number using `gh issue list --label "feature" --search "[Feature Name]"` and read it via `gh issue view <number>`.
+5. **Feature Research**: Discover any research issues linked to the feature or search using `gh issue list --label "milestone-research" --search "[Feature Name]"`.
 
 ## Workflow
 
 You must navigate these phases sequentially.
 
 ### Phase 0: Targeting
-**Goal**: Identify the specific Milestone to be decomposed into tasks.
+**Goal**: Identify the specific Feature to be specified and decomposed.
 
-- **Input**: Expect a Milestone Name or ID from the user (e.g., "Plan tasks for Milestone 2").
-- **Context**: Locate the corresponding `milestone-spec` issue using `gh issue list --label "milestone-spec" --search "[Milestone Name]"`. Read this spec to understand the UX Outcome and Feature Orchestration.
-- **Confirmation**: Confirm with the user that you are targeting the correct milestone before proceeding.
+- **Input**: Expect a Feature Name or ID from the user.
+- **Context**: Locate and read the corresponding `feature` issue to understand the UX Outcome, Technical Strategy, and Validation Criteria.
+- **Confirmation**: Confirm with the user that you are targeting the correct feature.
 
-### Phase 1: Task Breakdown
-**Goal**: Decompose the milestone into individual, atomic tasks.
+### Phase 1: Public Contract Design
+**Goal**: Define exactly how the feature will be interacted with at a top level.
 
-- Analyze the Milestone's "Definition of Done" and the associated research.
-- Propose a list of tasks. Each task should be a small, manageable unit of work (e.g., "Create X database table", "Implement Y API endpoint").
-- Get user approval on the task list before proceeding to strategic mapping.
+1. **API Design**: Propose the public API surface. This should include:
+    - Class/Function signatures.
+    - Data structures used for input/output.
+    - Doxygen-style comments explaining the contract.
+2. **High-Level Logic**: Provide a brief description or a Mermaid sequence diagram showing the top-level interaction flow.
+3. **Agreement**: Present this contract to the user. **You MUST get explicit approval on the public contract before proceeding to tests.**
 
-### Phase 2: Strategic Context Mapping
-**Goal**: Define the purpose, dependencies, and technical context for each task.
+### Phase 2: Test Strategy
+**Goal**: Define how to prove the contract is implemented correctly.
 
-For each approved task, describe:
-1. **The "How" and "Why"**: A high-level explanation of how this task contributes to the milestone and why it is necessary.
-2. **System Intersections**: Which other components, features, or existing code this task needs to touch or interact with.
-3. **Knowledge Needs**: Any additional research or context the implementing agent will need to know before starting the code.
+1. **Key Test Cases**: Identify the critical paths, edge cases, and failure modes that must be tested.
+2. **Testing Approach**: Specify the types of tests required (e.g., Unit Tests, Integration Tests, Mocking strategy).
+3. **Agreement**: Present the test plan to the user and get approval.
 
-### Phase 3: GitHub Task Creation
-**Goal**: Translate the plan into executable GitHub issues.
+### Phase 3: Full Feature Specification
+**Goal**: Synthesize all previous phases into a comprehensive specification document.
+
+Using the template at `/mnt/Data/workspace/ai-prompting/Documentation/feature-spec-template.md`, generate a complete Feature Specification. Ensure you include:
+- **Feature Overview & Scope**: (From the Feature Issue and Phase 1).
+- **Architectural Rationale**: (ADRs explaining why the contract was designed this way).
+- **How It Works**: (The approved Public API Contract and Visual Logic from Phase 1).
+- **How to Use It**: (Practical examples of calling the API).
+- **Important Contracts**: (Error handling and performance guarantees).
+
+**Delivery**: Post the completed specification as a detailed comment on the Parent Feature GitHub issue to ensure the implementing agent has 100% clarity.
+
+### Phase 4: Task Decomposition
+**Goal**: Break the finalized specification into individual, atomic tasks.
+
+- Analyze the finalized Spec Document and the approved Test Strategy.
+- Propose a list of tasks. Each task should be a small, manageable unit of work (e.g., "Implement X internal helper", "Write test for Y edge case").
+- Get user approval on the task list.
+
+### Phase 5: GitHub Task Creation
+**Goal**: Translate the plan into executable GitHub issues for the `jb-task-implementer`.
 
 Use the `gh` CLI to create issues for each task.
-- **Title**: `[Milestone Name] Task: [Short Description]`
-- **Body**: Include the Strategic Context (the "How" and "Why") and the System Intersections in the issue description.
+- **Title**: `[Feature Name] Task: [Short Description]`
+- **Body**: The `[Body]` must follow this structure:
+
+```markdown
+## 🎯 Purpose (How & Why)
+[Explanation of how this task contributes to the feature and the technical justification]
+
+## 🛠 System Intersections
+[List of components or files that this task must interact with]
+
+## 📚 Knowledge Requirements
+[Any specific documentation, research, or context needed to implement this task]
+
+## 🔗 Parent Feature
+- Parent Feature: #[Feature Issue Number]
+- Full Spec: [Link to the Spec Comment/File on the Parent Feature]
+```
+
 - **Labels**: Apply relevant labels (e.g., `todo`, `enhancement`).
-- **Milestone**: Associate the issue with the `Native Milestone` for this specific milestone (created in `jb-milestone-designer`) using `gh issue edit <number> --milestone "[Milestone Name]"`.
+- **Milestone**: Associate the issue with the `Release Milestone` using `gh issue edit <number> --milestone "[Release Milestone Name]"`.
 
-### Phase 4: Anchoring
-**Goal**: Permanently record the task plan in GitHub.
+**Handoff**: Once these issues are created, the feature is ready for `jb-task-implementer`.
 
-Instead of a local file, the GitHub Issues serve as the source of truth.
-1. **Verify Issues**: Ensure all planned tasks are created as GitHub issues.
-2. **Linkage**: Ensure every issue is correctly linked to the current Milestone.
+### Phase 6: Anchoring
+**Goal**: Permanently record the plan in GitHub.
 
-The final plan is anchored in the GitHub Issues for this milestone.
+1. **Verify Issues**: Ensure all tasks are created.
+2. **Linkage**: Verify every task links to the Parent Feature and the Full Spec.
 
 ## Guidelines
+- **Contract First**: Never move to tests or tasks until the public contract is signed off.
 - **Atomic Tasks**: If a task feels too large, break it down further.
-- **Big Picture Focus**: Do NOT define API surfaces (inputs/outputs) or write test cases here. That is the responsibility of the feature implementer during the TDD cycle.
-- **Technical Rigor**: Ensure the tasks are logically sequenced based on the Tech Stack. If you discover a fundamental technical flaw that makes the Milestone Spec impossible, request a stack revision: "I've discovered a technical blocker that requires a revision of the Tech Stack. Shall we run `jb-stack` to address this?"
-- **No Implementation**: Do NOT write the actual implementation code here. This skill is strictly for strategic planning.
+- **No Implementation**: This skill is strictly for specification and strategic planning.
+- **Technical Rigor**: If the process of writing the spec reveals a flaw in the Tech Stack, stop and request a `jb-stack` revision.
+
