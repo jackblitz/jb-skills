@@ -22,7 +22,7 @@ Installs skills into your global agent configuration. Recommended for general us
 
 ## 🚀 The Execution Pipeline
 
-This workflow must be followed sequentially. Each stage produces the "Source of Truth" required by the next stage.
+This workflow must be followed sequentially. Each stage produces the "Source of Truth" required by the next stage. You can explore the interactive workflow in [`docs/workflow-visualizer.html`](docs/workflow-visualizer.html).
 
 | Stage | Skill | Trigger | Goal | Source of Truth |
 | :--- | :--- | :--- | :--- | :--- |
