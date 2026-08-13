@@ -22,17 +22,18 @@ Installs skills into your global agent configuration. Recommended for general us
 
 ## 🚀 The Execution Pipeline
 
-This workflow must be followed sequentially. Each stage produces the "Source of Truth" required by the next stage.
+This workflow must be followed sequentially. Each stage produces the "Source of Truth" required by the next stage. You can explore the interactive workflow in [`docs/workflow-visualizer.html`](docs/workflow-visualizer.html).
 
 | Stage | Skill | Trigger | Goal | Source of Truth |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. Vision** | `jb-compass` | `"Run jb-compass"` | Align on core purpose & UX | GitHub Issue (docs tag) |
 | **2. Tech Stack** | `jb-stack` | `"Run jb-stack"` | Define tech stack & constraints | GitHub Issue (tech_stack tag) |
-| **3. Strategy** | `jb-release-planner` | `"Run jb-release-planner"` | Scope MVP & setup GitHub Project | GitHub Release / Project |
-| **4. Architecture** | `jb-feature-designer` | `"Run jb-feature-designer"` | Break release into features | GitHub Issues |
-| **5. Tactics** | `jb-task-planner` | `"Run jb-task-planner for [Milestone]"` | Plan API surfaces & GitHub Issues | GitHub Issues |
-| **6. Execution** | `jb-task-implementer` | `"Run jb-task-implementer for [Task]"` | TDD cycle (Interface $\rightarrow$ Test $\rightarrow$ Code) | GitHub Pull Requests |
-| **7. Delivery** | `jb-release-executor` | `"Run jb-release-executor"` | Audit, Bump Version & Final Release | GitHub Release / Tags |
+| **3. Strategy** | `jb-release-planner` | `"Run jb-release-planner"` | Scope MVP & setup Release Branch | GitHub Release / Branch |
+| **4. Requirements** | `jb-feature-designer` | `"Run jb-feature-designer"` | Define "What" & "Why" (FRD) | GitHub Issues / Feature Branch |
+| **5. Design** | `jb-task-planner` | `"Run jb-task-planner for [Feature]"` | Design "How" (API/Tests) & Map Tasks | GitHub Issues (Spec $\rightarrow$ Tasks) |
+| **6. Execution** | `jb-task-implementer` | `"Run jb-task-implementer for [Task]"` | Senior TDD Implementation | GitHub Pull Requests $\rightarrow$ Feature Branch |
+| **7. Integration** | `jb-feature-executor` | `"Run jb-feature-executor for [Feature]"` | Synthesize Tasks $\rightarrow$ Feature PR | GitHub Pull Request $\rightarrow$ Release Branch |
+| **8. Delivery** | `jb-release-executor` | `"Run jb-release-executor"` | Merge Release $\rightarrow$ Tag $\rightarrow$ Main | GitHub Release / Tags |
 
 ---
 
@@ -41,27 +42,19 @@ This workflow must be followed sequentially. Each stage produces the "Source of 
 ### 1. Vision & Blueprint (`jb-compass` & `jb-stack`)
 These skills establish the "What" and "How" of the project. Both the North Star and the Technical Blueprint are anchored in GitHub Issues.
 
-### 2. The Planning Chain (`planner` $\rightarrow$ `designer` $\rightarrow$ `planner`)
-This phase moves the project from a document to a living management system in GitHub:
+### 2. The Planning Chain (FRD $\rightarrow$ Technical Design $\rightarrow$ Tasks)
+This phase moves the project from a high-level vision to an executable technical roadmap:
 - **Release Planner**: Defines the scope and creates the GitHub Release and Project.
-- **Feature Designer**: Groups deliverables into high-level features with "Definition of Done" (DoD) and performs technical research.
-- **Task Planner**: Breaks milestones into atomic tasks, defines the strategic context (the "How" and "Why"), and creates GitHub Issues.
+- **Feature Designer (Product Manager)**: Defines the "What" and "Why". Creates a **Feature Requirement Document (FRD)** for each feature, focusing on functional requirements and user value.
+- **Task Planner (Lead Engineer)**: Defines the "How". Takes the FRD to design the **Public API Contract** and **Test Strategy**, synthesizes a Technical Spec, and decomposes the work into granular GitHub Issues.
 
-### 3. The Implementation Cycle (`jb-task-implementer`)
-Each task is implemented using a strict **3-Stage Review Process**:
+### 3. The Implementation & Integration Cycle
+This phase moves the project from technical design to production-ready code using a strict branching hierarchy:
+`main` $\rightarrow$ `release/[version]` $\rightarrow$ `feature/[name]` $\rightarrow$ `task/[id]`
 
-1.  **Stage 1: Interface Design (Architect Review)**
-    - Define public methods and variables.
-    - Add detailed documentation comments.
-    - **Approval**: User confirms the API surface.
-2.  **Stage 2: Test-First Setup (QA Review)**
-    - Create mocks/fakes and implement the test suite.
-    - Create a **"Red PR"** (Tests that fail).
-    - **Approval**: User confirms test coverage.
-3.  **Stage 3: Logic Implementation (Dev Review)**
-    - Write internal logic to pass all tests.
-    - Create the **"Green PR"** (Tests pass).
-    - **Approval**: User confirms the implementation is clean and follows `CODING_STANDARDS.md`.
+- **Task Implementer (Senior Engineer)**: Owns the TDD execution. Branches from the Feature branch, implements the task, and submits a PR back to the Feature branch.
+- **Feature Executor (Integration Lead)**: Aggregates all completed tasks into the Feature branch, verifies the integrated state against the FRD, and submits a final Feature PR to the Release branch.
+- **Release Executor (Release Manager)**: Merges the Release branch into `main`, tags the version, and cleans up all ephemeral branches.
 
 ### 4. Final Delivery (`jb-release-executor`)
 The release executor audits the completed GitHub issues against the release plan, bumps the version, generates a professional changelog, and pushes the final tag to GitHub.
