@@ -44,12 +44,16 @@ You must navigate these phases sequentially.
 3. **Review**: Present the draft to the user for editing.
 
 ### Phase 4: GitHub Execution
-**Goal**: Finalize the release on GitHub.
+**Goal**: Finalize the release on GitHub by merging the release branch and cleaning up.
 
-Use the `gh` CLI to:
-1. **Update Release**: `gh release edit [Tag] --notes "[Final Release Notes]"`
-2. **Tagging**: If the release was only a placeholder, create the final tag: `git tag [Version] && git push origin [Version]`.
-3. **Close Issues**: Close all issues associated with this release.
+1. **Merge Release Branch**: Merge the `release/[version-name]` branch into `main`.
+   `git checkout main && git pull && git merge "release/[version-name]" && git push origin main`
+2. **Update Release**: `gh release edit [Tag] --notes "[Final Release Notes]"`
+3. **Tagging**: Create the final release tag on `main`:
+   `git tag [Version] && git push origin [Version]`
+4. **Cleanup**: Delete the release branch and all feature branches associated with the release.
+   `git branch -d "release/[version-name]" && git push origin --delete "release/[version-name]"`
+5. **Close Issues**: Close any remaining issues associated with the release that were not closed by PR merges.
 
 ### Phase 5: Anchoring
 **Goal**: Permanently record the release as finalized in GitHub.
