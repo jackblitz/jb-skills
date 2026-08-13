@@ -43,23 +43,23 @@ You must navigate these phases sequentially.
 5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
 6. **Final Verification**: Run the entire test suite one last time to ensure 100% pass rate.
 
-
 ### Phase 2: Delivery & Handoff
-**Goal**: Deliver a production-ready submission and link it to the tracking system.
+**Goal**: Deliver a production-ready Pull Request to the feature branch for independent human or lead review.
 
 1. **Pull Request**: Create a single, comprehensive Pull Request from `task/[task-id]` to `feature/[feature-name]`. **The PR body MUST include `Closes #ISSUE_NUMBER` (replacing #ISSUE_NUMBER with the task issue number) to ensure the issue is automatically linked and closed upon merge.**
     - Include the public interface, the full test suite, and the internal implementation.
-2. **Submission**: Present the PR to the user for a final review.
-    - *Agent Role*: Act as the **Lead Developer** presenting their work.
-    - *Approval*: User confirms the implementation is clean, correct, and aligned with the spec.
-3. **Completion**: Once the PR is approved and merged, verify that the task issue is marked as completed. If not automatically closed by the PR, use `gh issue close <number>`.
-
+2. **Submission**: Present the PR link and a concise implementation summary to the user / supervising agent.
+    - *Agent Role*: Act as the **Senior Engineer** presenting completed work for code review.
+    - *Wait for Review*: Stop execution immediately after presenting the PR.
+3. **Strict Prohibition on Self-Review & Self-Merging**:
+    - **NEVER merge your own Pull Request.**
+    - **NEVER close the task issue manually.**
+    - All code review, approval, merging, and closure must be performed by the **human developer** or the **guiding review agent**. Your task execution ends the moment the PR is created and submitted for review.
 
 ## Guidelines
-- **Ownership**: You are the owner of this task. If you find a discrepancy in the spec or a better technical approach, propose it during Phase 0, not halfway through implementation.
+- **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review and merging must be performed independently by the human developer or the guiding lead agent.
+- **Ownership**: You are the owner of this task's implementation. If you find a discrepancy in the spec or a better technical approach, propose it during Phase 0, not halfway through implementation.
 - **Strict TDD**: Always ensure the tests are written and failing before the logic is implemented.
 - **Zero Drift**: The Full Feature Specification is the absolute source of truth. Do not deviate from the approved contract.
 - **Standard Adherence**: Any violation of `docs/CODING_STANDARDS.md` is considered a bug.
 - **Atomic Delivery**: Deliver one clean PR. Avoid "work in progress" commits in the final submission.
-
-
