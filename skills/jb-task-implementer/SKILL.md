@@ -14,7 +14,7 @@ Before starting, you MUST read and synthesize the following:
 3. **Full Feature Specification**: The comprehensive spec document attached as a comment to the Parent Feature issue. This is your source of truth for the API contract.
 4. **Product Alignment**: The Parent Feature issue and the Release Plan. Ensure your implementation aligns with the overarching goals of the feature and the milestone.
 5. **Technical Blueprint (Tech Stack)**: Discover the tech stack issue number using `gh issue list --label "tech_stack" --search "Tech Stack" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
-6. **Coding Standards**: `docs/CODING_STANDARDS.md`.
+6. **Coding Standards**: Must locate and read `docs/CODING_STANDARDS.md`. You must review this document thoroughly before writing any interface or implementation code.
 
 ## Workflow
 
@@ -23,13 +23,13 @@ You must navigate these phases sequentially.
 ### Phase 0: Knowledge Sync & Alignment
 **Goal**: Establish 100% clarity on the "What", "How", and "Standard" before writing code.
 
-1. **Deep Sync**: Read all the prerequisites listed above.
+1. **Deep Sync**: Read all the prerequisites listed above, paying special attention to `docs/CODING_STANDARDS.md`.
 2. **Implementation Path**: Present a concise summary to the user before starting. This must include:
     - **The Goal**: What exactly is being implemented.
     - **The Contract**: The specific public API surface you are adhering to.
     - **The Verification**: The key test cases you will use to prove correctness.
     - **The Alignment**: How this implementation satisfies the product requirements in the Parent Feature.
-    - **The Standard**: Any specific coding patterns from `CODING_STANDARDS.md` that are particularly relevant here.
+    - **The Standard**: Explicitly cite the specific coding conventions, docstring requirements, and in-line 'what & why' commenting patterns from `docs/CODING_STANDARDS.md` that you will apply.
 3. **Confirmation**: Wait for the user to confirm your "Implementation Path".
 
 ### Phase 1: Senior TDD Execution & Method Documentation
