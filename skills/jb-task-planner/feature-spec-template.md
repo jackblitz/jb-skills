@@ -94,15 +94,15 @@ sequenceDiagram
   - **Trade-offs**: [Pros and cons accepted]
 
 ## 2.3 Granular Task Decomposition
-1. **Task 1: [Short Title]**
-   - **Scope**: [Data models, schema, or low-level primitives]
-   - **Deliverable**: [Concrete files and unit tests]
-2. **Task 2: [Short Title]**
-   - **Scope**: [Core internal business logic / engine / storage]
-   - **Deliverable**: [Engine implementation and integration tests]
-3. **Task 3: [Short Title]**
-   - **Scope**: [Public API Facade / Controller / Consumer Interface]
-   - **Deliverable**: [Public contract implementation and end-to-end verification]
+1. **Task 1: Public Interface & Test Scaffolding**
+   - **Scope**: [Create public header/interface files, data structures, and initial test harness based on Document 1]
+   - **Deliverable**: [Public headers, interface contracts, and compilable targets]
+2. **Task 2: Core Subsystem / Engine Logic**
+   - **Scope**: [Implement core internal logic, data storage, thread workers, or business rules]
+   - **Deliverable**: [Internal logic implementation and subsystem tests]
+3. **Task 3: Integration & Edge Cases**
+   - **Scope**: [Connect public API to internal engine, handle edge cases, error recovery, and end-to-end flow]
+   - **Deliverable**: [Complete integration and verification against Document 3 test plan]
 
 ## 2.4 Task Interaction & Dependency Matrix
 | Task | Depends On | Interacts With | Role in Overall Feature |

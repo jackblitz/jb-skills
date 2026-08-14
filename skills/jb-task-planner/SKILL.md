@@ -49,7 +49,9 @@ Generate the following 3 documents using `feature-spec-template.md` (located wit
 
 #### 📄 Document 2: Feature Architecture & Task Decomposition
 - **System Architecture & Interaction Flow**: A Mermaid sequence or component diagram showing internal subsystem logic and data flow.
-- **Granular Task Decomposition**: A numbered, logically sequenced breakdown of the work into atomic tasks (e.g., Task 1: Data Models & Schema $\rightarrow$ Task 2: Core Engine / Facade $\rightarrow$ Task 3: API Integration).
+- **Granular Task Sequencing Rule**:
+  - **Task 1 MUST always be Public Interface & Test Scaffolding**: Declares the public header/interface, public types, and base test harness based on Document 1.
+  - **Subsequent Tasks (Task 2, 3, etc.) are Implementation Tasks**: Focus on internal engines, algorithms, thread workers, storage, and subsystem logic.
 - **Task Interaction Matrix**: A clear explanation of how each task connects, depends on, and interacts with the other tasks to form the completed feature.
 
 #### 📄 Document 3: Agreed Test Plan & Verification Strategy

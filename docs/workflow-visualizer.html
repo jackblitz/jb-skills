@@ -631,7 +631,7 @@ gitGraph
         { name: "Phase 1: In-Chat Discovery & Proposals", desc: "Asks targeted questions and presents initial proposals in chat (no comment spam)." },
         { name: "Phase 2: 3-Document Synthesis", desc: "Synthesizes Document 1 (Public API & Usage), Document 2 (Architecture & Task Decomposition), and Document 3 (Agreed Test Plan)." },
         { name: "Phase 3: Parent Feature Anchoring", desc: "Posts consolidated 3-document technical specification as a single authoritative comment on the Feature issue." },
-        { name: "Phase 4: GitHub Task Creation", desc: "Creates granular task issues (Purpose, Technical Design, Intersections, Tests, Spec Link) assigned to Milestone." },
+        { name: "Phase 4: GitHub Task Creation", desc: "Creates task issues (Task 1 = Public Interface & Scaffolding; Subsequent Tasks = Internal Subsystems/Engines) assigned to Milestone." },
         { name: "Phase 5: Verification & Handoff", desc: "Verifies all task issues and handoff to jb-task-implementer." }
       ]
     },
@@ -643,9 +643,9 @@ gitGraph
       goal: "Execute uninterrupted Test-Driven Development (Red -> Green -> Refactor) and submit Task PR.",
       anchor: "Task PR -> feature/* Branch",
       phases: [
-        { name: "Phase 0: Knowledge Sync & Alignment", desc: "Reads Task issue, spec comments, Tech Stack, and CODING_STANDARDS.md; presents Implementation Path for user signoff." },
-        { name: "Phase 1: Senior TDD Execution", desc: "Branch task/[id] -> Interface Implementation -> Red (failing tests) -> Green (passing logic) -> Refactor -> 100% verification." },
-        { name: "Phase 2: Delivery & Handoff", desc: "Submits PR to feature/[name] with 'Closes #TASK_ISSUE'; awaits independent review by human or lead (strictly no self-merging)." }
+        { name: "Phase 0: Knowledge Sync & Alignment", desc: "Syncs scope: Task 1 reviews public header/contract; Subsequent tasks focus deeply on internal implementation & subsystem tests (no header dumps)." },
+        { name: "Phase 1: Senior TDD Execution", desc: "Branch task/[id] -> Interface Implementation -> Red (failing tests) -> Green (passing logic) -> Refactor against CODING_STANDARDS.md -> 100% verification." },
+        { name: "Phase 2: Delivery & Handoff", desc: "Submits PR to feature/[name] with 'Closes #TASK_ISSUE' and provides exact merge/close command for reviewer (strictly no self-merging)." }
       ]
     },
     {

@@ -21,15 +21,20 @@ Before starting, you MUST read and synthesize the following:
 You must navigate these phases sequentially.
 
 ### Phase 0: Knowledge Sync & Alignment
-**Goal**: Establish 100% clarity on the "What", "How", and "Standard" before writing code.
+**Goal**: Establish 100% clarity on the task scope, design, and verification before writing code.
 
 1. **Deep Sync**: Read all the prerequisites listed above.
-2. **Implementation Path**: Present a concise summary to the user before starting. This must include:
-    - **The Goal**: What exactly is being implemented.
-    - **The Contract**: The specific public API surface you are adhering to.
-    - **The Verification**: The key test cases you will use to prove correctness.
-    - **The Alignment**: How this implementation satisfies the product requirements in the Parent Feature.
-    - **The Standard**: Any specific coding patterns from `CODING_STANDARDS.md` that are particularly relevant here.
+2. **Implementation Path**: Present a concise, contextual summary to the user tailored to the task type:
+    - **If Task 1 (Public Interface & Contract Task)**:
+      - **🎯 The Goal**: Establish the public API header, interface definitions, and base test scaffolding.
+      - **📜 The Public Contract**: The specific public API declarations, signatures, and types from Document 1 being created.
+      - **🧪 Verification**: The contract and signature test suite.
+    - **If Subsequent Task (Internal Engine, Subsystem, or Logic Task)**:
+      - **🎯 The Goal**: What internal subsystem capability, engine logic, or algorithm is being implemented.
+      - **🛠️ Implementation Design & Scope of Changes**: Focus deeply on the **internal implementation**—specific `.c`/`.cpp`/`.ts` files being modified, internal structs/helpers, threading/mutex logic, data flow, and algorithms. (Do NOT dump the already-established public header file).
+      - **🧪 Verification & Subsystem Tests**: The specific unit/integration test cases being written to prove this subsystem logic works.
+      - **⚙️ System Intersections**: How this implementation connects with other internal components and existing interfaces.
+    - **📏 Standards & Conventions**: Specific patterns from `docs/CODING_STANDARDS.md` (e.g., method comments explaining what and why).
 3. **Confirmation**: Wait for the user to confirm your "Implementation Path".
 
 ### Phase 1: Senior TDD Execution
@@ -37,27 +42,44 @@ You must navigate these phases sequentially.
 
 1. **Branching**: Create a dedicated task branch from the feature branch.
    `git checkout "feature/[feature-name]" && git pull && git checkout -b "task/[task-id]"`
-2. **Interface Implementation**: Implement the approved public methods and variables.
-3. **Test Suite (Red)**: Implement the test suite based on the approved Test Strategy. Verify that the tests fail as expected.
+2. **Scaffolding / Interfaces**: Declare or implement any necessary types, internal headers, or function signatures required for this task.
+3. **Test Suite (Red)**: Implement the test suite based on the approved Test Strategy for this task. Verify that the tests fail as expected.
 4. **Logic Implementation (Green)**: Write the internal logic required to make all tests pass.
-5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
+5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Ensure all methods include comments explaining what they are doing and why. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
 6. **Final Verification**: Run the entire test suite one last time to ensure 100% pass rate.
 
-### Phase 2: Delivery & Handoff
-**Goal**: Deliver a production-ready Pull Request to the feature branch for independent human or lead review.
+### Phase 2: Delivery & Review Handoff
+**Goal**: Deliver a production-ready Pull Request to the feature branch for independent human or lead review, with explicit instructions for issue closure upon merge.
 
-1. **Pull Request**: Create a single, comprehensive Pull Request from `task/[task-id]` to `feature/[feature-name]`. **The PR body MUST include `Closes #ISSUE_NUMBER` (replacing #ISSUE_NUMBER with the task issue number) to ensure the issue is automatically linked and closed upon merge.**
-    - Include the public interface, the full test suite, and the internal implementation.
-2. **Submission**: Present the PR link and a concise implementation summary to the user / supervising agent.
-    - *Agent Role*: Act as the **Senior Engineer** presenting completed work for code review.
-    - *Wait for Review*: Stop execution immediately after presenting the PR.
+1. **Pull Request Creation**:
+   Create a single, comprehensive Pull Request from `task/[task-id]` to `feature/[feature-name]` using `gh pr create`:
+   ```bash
+   gh pr create --base "feature/[feature-name]" --head "task/[task-id]" --title "[Feature Name] Task: [Short Description]" --body "[PR Body]"
+   ```
+   **PR Body Requirements**:
+   - Must include `Closes #[TASK_ISSUE_NUMBER]` in the body for cross-linking.
+   - Include a concise summary of:
+     - Public interface or internal scaffolding implementations.
+     - Test suite coverage (unit and integration tests).
+     - Internal logic changes.
+
+2. **Submission & Reviewer Action Prompt**:
+   Present the PR link and a concise implementation summary to the user / supervising agent.
+   Provide the exact reviewer command to merge the PR and close the task issue:
+   > 💡 *Note: Because this PR merges into `feature/[feature-name]` (not the default `main` branch), GitHub will not auto-close the issue on merge. The reviewer (human or lead agent) should execute the following command upon approving the PR:*
+   > ```bash
+   > gh pr merge [PR_NUMBER] --merge --delete-branch && gh issue close [TASK_ISSUE_NUMBER] --comment "Completed and merged into feature/[feature-name] via PR #[PR_NUMBER]"
+   > ```
+
 3. **Strict Prohibition on Self-Review & Self-Merging**:
-    - **NEVER merge your own Pull Request.**
-    - **NEVER close the task issue manually.**
-    - All code review, approval, merging, and closure must be performed by the **human developer** or the **guiding review agent**. Your task execution ends the moment the PR is created and submitted for review.
+   - **Author Role Only**: The implementing agent is strictly the code author.
+   - **No Self-Merging**: Do **NOT** run `gh pr merge`, `git merge`, or `gh issue close` yourself.
+   - Your task execution is complete the moment the PR is created and submitted for review.
 
 ## Guidelines
-- **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review and merging must be performed independently by the human developer or the guiding lead agent.
+- **Context-Specific Sync**: In Phase 0, focus on the actual code being implemented in this task. Do not ask the user to verify unrelated public interfaces if the task is an internal logic or engine component.
+- **Coding Standards & Comments**: Strictly adhere to `docs/CODING_STANDARDS.md`. Ensure all methods include comments explaining what the method is doing and why.
+- **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review, merging, and task issue closure must be performed independently by the human developer or the guiding lead agent.
 - **Ownership**: You are the owner of this task's implementation. If you find a discrepancy in the spec or a better technical approach, propose it during Phase 0, not halfway through implementation.
 - **Strict TDD**: Always ensure the tests are written and failing before the logic is implemented.
 - **Zero Drift**: The Full Feature Specification is the absolute source of truth. Do not deviate from the approved contract.
