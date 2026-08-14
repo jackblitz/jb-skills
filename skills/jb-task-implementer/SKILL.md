@@ -24,12 +24,17 @@ You must navigate these phases sequentially.
 **Goal**: Establish 100% clarity on the task scope, design, and verification before writing code.
 
 1. **Deep Sync**: Read all the prerequisites listed above.
-2. **Implementation Path**: Present a concise, contextual summary to the user before starting. Tailor this summary to the **actual scope of THIS specific task**:
-    - **🎯 The Goal**: What specific capability, internal subsystem, or bugfix is being implemented.
-    - **🛠️ Scope of Changes**: The specific files and key internal or public functions/data structures being created or modified. (Do **NOT** dump unrelated public header files if this task is an internal logic, engine, or subsystem implementation).
-    - **🧪 Verification & Test Plan**: The specific test cases and scenarios you will write to prove correctness for this task.
-    - **⚙️ System Intersections**: How this piece connects with the rest of the codebase (e.g. dependencies, threading, mutexes, I/O).
-    - **📏 Standards & Conventions**: Specific patterns from `docs/CODING_STANDARDS.md` applicable here (e.g., method comments explaining what and why).
+2. **Implementation Path**: Present a concise, contextual summary to the user tailored to the task type:
+    - **If Task 1 (Public Interface & Contract Task)**:
+      - **🎯 The Goal**: Establish the public API header, interface definitions, and base test scaffolding.
+      - **📜 The Public Contract**: The specific public API declarations, signatures, and types from Document 1 being created.
+      - **🧪 Verification**: The contract and signature test suite.
+    - **If Subsequent Task (Internal Engine, Subsystem, or Logic Task)**:
+      - **🎯 The Goal**: What internal subsystem capability, engine logic, or algorithm is being implemented.
+      - **🛠️ Implementation Design & Scope of Changes**: Focus deeply on the **internal implementation**—specific `.c`/`.cpp`/`.ts` files being modified, internal structs/helpers, threading/mutex logic, data flow, and algorithms. (Do NOT dump the already-established public header file).
+      - **🧪 Verification & Subsystem Tests**: The specific unit/integration test cases being written to prove this subsystem logic works.
+      - **⚙️ System Intersections**: How this implementation connects with other internal components and existing interfaces.
+    - **📏 Standards & Conventions**: Specific patterns from `docs/CODING_STANDARDS.md` (e.g., method comments explaining what and why).
 3. **Confirmation**: Wait for the user to confirm your "Implementation Path".
 
 ### Phase 1: Senior TDD Execution
