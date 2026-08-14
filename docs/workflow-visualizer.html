@@ -624,14 +624,14 @@ gitGraph
       name: "jb-task-planner",
       role: "Lead Engineer",
       trigger: "Run jb-task-planner for [Feature]",
-      goal: "Collaborates in chat on API design, test plan, and architecture, synthesizes 3 core spec documents, and creates granular tasks.",
+      goal: "Collaborates in chat on domain models, class naming conventions, architecture, and task decomposition.",
       anchor: "Feature Issue (Single Consolidated Spec Comment) & Task Issues",
       phases: [
         { name: "Phase 0: Targeting & Context Intake", desc: "Targets feature issue and reads the FRD Scope of Work and requirements." },
-        { name: "Phase 1: In-Chat Discovery & Proposals", desc: "Asks targeted questions and presents initial proposals in chat (no comment spam)." },
-        { name: "Phase 2: 3-Document Synthesis", desc: "Synthesizes Document 1 (Public API & Usage), Document 2 (Architecture & Task Decomposition), and Document 3 (Agreed Test Plan)." },
+        { name: "Phase 1: In-Chat Discovery & Proposals", desc: "Asks targeted questions on domain models and naming conventions; proposes architecture in chat." },
+        { name: "Phase 2: 3-Document Synthesis", desc: "Synthesizes Document 1 (Domain Model & Class Naming), Document 2 (Architecture & Task Breakdown), and Document 3 (Agreed Test Strategy)." },
         { name: "Phase 3: Parent Feature Anchoring", desc: "Posts consolidated 3-document technical specification as a single authoritative comment on the Feature issue." },
-        { name: "Phase 4: GitHub Task Creation", desc: "Creates task issues (Task 1 = Public Interface & Scaffolding; Subsequent Tasks = Internal Subsystems/Engines) assigned to Milestone." },
+        { name: "Phase 4: GitHub Task Creation", desc: "Creates task issues with detailed purpose, design outlines, and test cases assigned to Milestone." },
         { name: "Phase 5: Verification & Handoff", desc: "Verifies all task issues and handoff to jb-task-implementer." }
       ]
     },
@@ -640,11 +640,11 @@ gitGraph
       name: "jb-task-implementer",
       role: "Senior Software Engineer",
       trigger: "Run jb-task-implementer for [Task]",
-      goal: "Execute uninterrupted Test-Driven Development (Red -> Green -> Refactor) and submit Task PR.",
+      goal: "Executes Just-In-Time task design, Senior TDD cycle, and pre-PR build & test verification.",
       anchor: "Task PR -> feature/* Branch",
       phases: [
-        { name: "Phase 0: Knowledge Sync & Alignment", desc: "Syncs scope: Task 1 reviews public header/contract; Subsequent tasks focus deeply on internal implementation & subsystem tests (no header dumps)." },
-        { name: "Phase 1: Senior TDD Execution", desc: "Branch task/[id] -> Interface Implementation -> Red (failing tests) -> Green (passing logic) -> Refactor against CODING_STANDARDS.md -> 100% verification." },
+        { name: "Phase 0: Knowledge Sync & JIT Task Design", desc: "Presents Just-In-Time technical design proposal (exact signatures/usage or internal algorithms) for user signoff." },
+        { name: "Phase 1: Senior TDD & Build Verification", desc: "Branch task/[id] -> Scaffolding -> Red tests -> Green logic -> Refactor -> Verify tests & build main app target cleanly." },
         { name: "Phase 2: Delivery & Handoff", desc: "Submits PR to feature/[name] with 'Closes #TASK_ISSUE' and provides exact merge/close command for reviewer (strictly no self-merging)." }
       ]
     },
