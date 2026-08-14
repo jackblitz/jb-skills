@@ -13,7 +13,6 @@ You MUST read the following artifacts before starting:
 2. **Tech Stack**: Discover the tech stack issue number using `gh issue list --label "tech_stack" --search "Tech Stack" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 3. **Release Plan & End Goal**: Discover the release plan issue number using `gh issue list --label "release-plan" --search "Release Plan" --json number --limit 1 --template '{{range .}}{{.number}}{{end}}'` and read it via `gh issue view <number>`.
 4. **Feature FRD**: Discover the feature issue number using `gh issue list --label "feature" --search "[Feature Name]"` and read it via `gh issue view <number>`. The Feature issue body contains the FRD (User Story, Functional Requirements, Scope of Work).
-5. **Coding Standards**: Read `docs/CODING_STANDARDS.md` to ensure API design, method annotations, and test strategies adhere to project standards.
 
 ## Workflow
 
