@@ -32,15 +32,31 @@ You must navigate these phases sequentially.
     - **The Standard**: Any specific coding patterns from `CODING_STANDARDS.md` that are particularly relevant here.
 3. **Confirmation**: Wait for the user to confirm your "Implementation Path".
 
-### Phase 1: Senior TDD Execution
-**Goal**: Implement the task using a professional TDD cycle. Do NOT stop for intermediate reviews.
+### Phase 1: Senior TDD Execution & Method Documentation
+**Goal**: Implement the task using a professional TDD cycle with complete method documentation and explanatory comments. Do NOT stop for intermediate reviews.
 
 1. **Branching**: Create a dedicated task branch from the feature branch.
    `git checkout "feature/[feature-name]" && git pull && git checkout -b "task/[task-id]"`
-2. **Interface Implementation**: Implement the approved public methods and variables.
-3. **Test Suite (Red)**: Implement the test suite based on the approved Test Strategy. Verify that the tests fail as expected.
-4. **Logic Implementation (Green)**: Write the internal logic required to make all tests pass.
-5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
+2. **Interface Implementation & Docstrings**:
+   - Implement approved public methods, classes, and types.
+   - **Method Docstrings**: Every class, method, and function MUST include comprehensive docstrings/JSDoc/Doxygen comments detailing:
+     - **Purpose**: What the method does and its role in the feature.
+     - **Parameters**: Detailed explanation of each input parameter.
+     - **Return Value**: What is returned under normal execution.
+     - **Exceptions / Errors**: What error conditions can be triggered and why.
+3. **Test Suite (Red)**:
+   - Implement the test suite based on the approved Test Strategy.
+   - **Test Method Comments**: Add a docstring to each test case explaining the specific scenario, boundary condition, or edge case being tested and the expected outcome.
+   - Verify that the tests fail as expected.
+4. **Logic Implementation (Green) & In-line Comments ("What" & "Why")**:
+   - Write the internal logic required to make all tests pass.
+   - **In-line Explanations**: Within method bodies, write clear in-line comments explaining:
+     - **What** the code is doing at each logical phase (e.g., input normalization, cache lookup, state transition).
+     - **Why** this specific approach, algorithm, or guard clause was chosen (business rules, performance trade-offs, defensive programming).
+5. **Refactor & Documentation Review**:
+   - Review the code against `docs/CODING_STANDARDS.md`.
+   - Ensure there is zero unexplained or cryptic logic. Every non-trivial code block must have a clear "Why" comment.
+   - Optimize for readability, maintainability, and performance without stripping comments.
 6. **Final Verification**: Run the entire test suite one last time to ensure 100% pass rate.
 
 ### Phase 2: Delivery & Review Handoff
@@ -54,9 +70,9 @@ You must navigate these phases sequentially.
    **PR Body Requirements**:
    - Must include `Closes #[TASK_ISSUE_NUMBER]` in the body for cross-linking.
    - Include a concise summary of:
-     - Public interface implementations.
+     - Public interface implementations and docstrings.
      - Test suite coverage (unit and integration tests).
-     - Internal logic changes.
+     - Internal logic changes and architectural notes.
 
 2. **Submission & Reviewer Action Prompt**:
    Present the PR link and a concise implementation summary to the user / supervising agent.
@@ -72,6 +88,7 @@ You must navigate these phases sequentially.
    - Your task execution is complete the moment the PR is created and submitted for review.
 
 ## Guidelines
+- **Mandatory Method & In-line Comments ("What" & "Why")**: Every method must include a comprehensive docstring describing its purpose and contract. Inside method bodies, include in-line explanations clarifying *what* the logic is doing and *why* that specific approach was taken. Clean code is not an excuse to omit explanatory comments.
 - **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review, merging, and task issue closure must be performed independently by the human developer or the guiding lead agent.
 - **Ownership**: You are the owner of this task's implementation. If you find a discrepancy in the spec or a better technical approach, propose it during Phase 0, not halfway through implementation.
 - **Strict TDD**: Always ensure the tests are written and failing before the logic is implemented.
