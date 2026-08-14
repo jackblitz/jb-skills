@@ -40,6 +40,8 @@ You must navigate these phases sequentially. **Do NOT post fragmented comments t
 ### Phase 2: Synthesis of the 3 Core Technical Documents
 **Goal**: Synthesize the agreed-upon technical plan into 3 structured documents.
 
+> ⚠️ **STRICT STORAGE RULE**: Do **NOT** create or write spec files to the repository filesystem (e.g. `doc/specs/`, `docs/specs/`, or `*.md` spec files). The specification is maintained **exclusively** as a comment on the GitHub Parent Feature issue.
+
 Generate the following 3 documents using `feature-spec-template.md` (located within this skill's directory) as a reference:
 
 #### 📄 Document 1: Public Interface & Usage Specification
@@ -107,6 +109,7 @@ Use the `gh` CLI to create issues for each task in the decomposition:
 3. **Handoff**: Confirm completion and announce readiness for `jb-task-implementer`.
 
 ## Guidelines
+- **GitHub Issues as Sole Source of Truth**: Never create files in `doc/specs/`, `docs/specs/`, or elsewhere in the repo for specifications. All technical specifications are stored exclusively as comments on the GitHub Feature issue.
 - **No Comment Spam**: Never post intermediate drafts or piecemeal comments. Collaborate in chat and post only the finalized 3-document specification as a single comment.
 - **Contract First**: Never proceed to task creation until the public interface, architecture, and test plan are completely signed off.
 - **Atomic Tasks**: Each decomposed task must be independent, testable, and manageable for a single TDD cycle.
