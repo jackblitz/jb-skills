@@ -51,14 +51,15 @@ The workflow must be executed sequentially. Each stage produces an authoritative
 * **Release Planner (`jb-release-planner`)**: Defines the scope of the MVP or release, establishes measurable success criteria, creates the overarching GitHub Release Milestone, and initializes the dedicated `release/[version]` branch from `main`.
 * **Feature Designer (`jb-feature-designer`)**: Breaks the Release Plan into **Feature Requirement Documents (FRDs)** defining User Stories, Functional Requirements, Scope of Work, and Validation Criteria. Creates the dedicated `feature/[name]` branch from the release branch.
 * **Task Planner (`jb-task-planner`)**: Collaborates interactively in chat to design the implementation. Synthesizes **3 Core Technical Documents** posted as a single consolidated comment on the Parent Feature issue:
-  1. **📄 Document 1: Public Interface & Usage Specification** (API signatures, schemas, runnable usage examples).
+  1. **📄 Document 1: High-Level Domain Model & Class Naming Conventions** (Domain entities, class roles, naming standards, and public facade concept; concrete signatures are refined Just-In-Time during task execution).
   2. **📄 Document 2: Feature Architecture & Task Decomposition** (Subsystem interaction diagram, sequenced task breakdown, and task interaction matrix).
   3. **📄 Document 3: Agreed Test Plan & Verification Strategy** (Critical path tests, edge cases, unit/integration boundaries, and acceptance benchmarks).
   Decomposes the work into granular GitHub Task Issues assigned to the Release Milestone.
 
 ### 3. The Implementation & Review Cycle (`jb-task-implementer`)
-* **Senior TDD Execution**: Branches `task/[id]` from `feature/[name]`. Executes an uninterrupted Test-Driven Development cycle (**Red** failing test $\rightarrow$ **Green** functional logic $\rightarrow$ **Refactor** standards compliance $\rightarrow$ 100% verification).
-* **Delivery & Strict Review Separation**: Submits a Pull Request from `task/[id]` to `feature/[name]` with `Closes #TASK_ISSUE`.
+* **Just-In-Time Task Design**: In Phase 0, presents a concrete JIT design proposal (exact method signatures, usage snippets, or internal threading/data structures) for developer confirmation before writing code.
+* **Senior TDD & Build Verification**: Branches `task/[id]` from `feature/[name]`. Executes an uninterrupted Test-Driven Development cycle (**Red** failing test $\rightarrow$ **Green** functional logic $\rightarrow$ **Refactor** standards compliance $\rightarrow$ **Build & Test Verification**: runs full test suite AND builds main application targets cleanly before PR).
+* **Delivery & Strict Review Separation**: Submits a Pull Request from `task/[id]` to `feature/[name]` with `Closes #TASK_ISSUE` and provides the exact reviewer merge/close command.
 * **Prohibition on Self-Merging**: The implementing agent is strictly the code author and is **forbidden from self-merging or manually closing issues**. Code review and merging must be performed by the human developer or supervising lead agent.
 
 ### 4. Integration & Production Delivery (`jb-feature-executor` & `jb-release-executor`)

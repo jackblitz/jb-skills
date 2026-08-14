@@ -1,6 +1,6 @@
 # Feature Technical Specification: [Feature Name]
 
-> **Instructions**: This document consolidates the 3 core technical design pillars agreed upon during task planning. It serves as the single source of truth comment on the Parent Feature issue.
+> **Instructions**: This document consolidates the 3 core technical design pillars agreed upon during task planning. It serves as the single source of truth comment on the Parent Feature issue. Detailed method signatures, parameter types, and usage code are refined Just-In-Time in Phase 0 of each task.
 
 ## Document Governance
 
@@ -13,60 +13,23 @@
 
 ---
 
-# 📄 Document 1: Public Interface & Usage Specification
+# 📄 Document 1: High-Level Domain Model & Class Naming Conventions
 
-> **Goal**: Define the public contract and show how consumers will interact with this feature.
+> **Goal**: Define the domain architecture, class roles, naming standards, and high-level facade concepts.
 
-## 1.1 Public API & Class Signatures
-[Define the exact public interfaces, classes, function signatures, and parameter annotations]
+## 1.1 Domain Concepts & Architectural Entities
+- **`[Entity/Class 1 Name]`**: [Core responsibility, state maintained, architectural layer (e.g. Engine / Storage / Facade)]
+- **`[Entity/Class 2 Name]`**: [Core responsibility, state maintained, architectural layer]
+- **`[Entity/Class 3 Name]`**: [Core responsibility, state maintained, architectural layer]
 
-```cpp
-/**
- * @file [feature_header.h]
- * @brief Public interface contract for [Feature Name].
- */
-#pragma once
+## 1.2 Naming Conventions & Design Standards
+- **Naming Conventions**: [e.g. PascalCase for classes/types, camelCase for methods, UPPER_CASE for constants, specific project prefixes]
+- **Error Handling Pattern**: [e.g. Return `AppResult` / Error Codes / Exceptions / Result<T, E>]
+- **Memory & Concurrency Model**: [e.g. Thread-safe with internal mutexes / single-threaded event loop / immutable structs]
 
-#include <string>
-#include <vector>
-
-class FeatureFacade {
-public:
-    /**
-     * @brief Executes the primary feature capability.
-     * @param[in] input_data Input payload for processing.
-     * @return Execution result code or payload.
-     * @throws std::runtime_error On critical failure.
-     */
-    int processData(const std::string& input_data);
-};
-```
-
-## 1.2 Data Structures & Schemas
-- **Input Models**: [Definitions of input structs, DTOs, or JSON schemas]
-- **Output Models**: [Definitions of return structs or response types]
-
-## 1.3 Usage Guide & Complete Code Example
-```cpp
-#include "[feature_header.h]"
-#include <iostream>
-
-int main() {
-    FeatureFacade feature;
-    try {
-        int result = feature.processData("sample payload");
-        std::cout << "Success with code: " << result << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
-    return 0;
-}
-```
-
-## 1.4 Error Handling & Contracts
-- **Error Strategy**: [Exceptions / Result types / Error codes]
-- **Guarantees**: [Thread-safety, immutability, idempotent behaviors]
+## 1.3 High-Level Public Facade Concept
+- **Primary Consumer Entrypoint**: [Name of the main public facade class or function group]
+- **High-Level Interaction Pattern**: [How external callers or UI components interact with this feature at a conceptual level]
 
 ---
 
@@ -77,14 +40,17 @@ int main() {
 ## 2.1 Subsystem Architecture & Interaction Flow
 ```mermaid
 sequenceDiagram
-    participant Caller as Calling Component
-    participant Facade as Feature Facade (Task 2)
-    participant Engine as Internal Worker / Storage (Task 1)
+    participant Caller as Calling Component / UI
+    participant Facade as Feature Facade (Task 3)
+    participant Engine as Subsystem Engine / Worker (Task 2)
+    participant Storage as Data Models & State (Task 1)
 
-    Caller->>Facade: processData(payload)
-    Facade->>Engine: validate_and_store(payload)
-    Engine-->>Facade: storage_ack
-    Facade-->>Caller: result_code
+    Caller->>Facade: initiateOperation(params)
+    Facade->>Engine: processRequest(payload)
+    Engine->>Storage: persistState(data)
+    Storage-->>Engine: success
+    Engine-->>Facade: operationResult
+    Facade-->>Caller: result
 ```
 
 ## 2.2 Architectural Decisions (ADRs)
@@ -94,22 +60,22 @@ sequenceDiagram
   - **Trade-offs**: [Pros and cons accepted]
 
 ## 2.3 Granular Task Decomposition
-1. **Task 1: Public Interface & Test Scaffolding**
-   - **Scope**: [Create public header/interface files, data structures, and initial test harness based on Document 1]
-   - **Deliverable**: [Public headers, interface contracts, and compilable targets]
-2. **Task 2: Core Subsystem / Engine Logic**
-   - **Scope**: [Implement core internal logic, data storage, thread workers, or business rules]
-   - **Deliverable**: [Internal logic implementation and subsystem tests]
-3. **Task 3: Integration & Edge Cases**
-   - **Scope**: [Connect public API to internal engine, handle edge cases, error recovery, and end-to-end flow]
-   - **Deliverable**: [Complete integration and verification against Document 3 test plan]
+1. **Task 1: [Short Title] (Scaffolding / Data Models / Storage)**
+   - **Scope**: [Data models, internal state structures, or foundational scaffolding]
+   - **Deliverable**: [Concrete files, structures, and unit tests]
+2. **Task 2: [Short Title] (Core Subsystem / Engine / Worker)**
+   - **Scope**: [Implement core internal logic, data pipelines, thread workers, or business rules]
+   - **Deliverable**: [Internal engine implementation and subsystem unit/integration tests]
+3. **Task 3: [Short Title] (Public Facade / Integration & Edge Cases)**
+   - **Scope**: [Connect public API facade to internal engine, handle edge cases, error recovery, and end-to-end flow]
+   - **Deliverable**: [Complete integration, public interface docstrings, and verification against Document 3 test plan]
 
 ## 2.4 Task Interaction & Dependency Matrix
 | Task | Depends On | Interacts With | Role in Overall Feature |
 |---|---|---|---|
-| **Task 1** | None | Storage / Subsystem A | Provides foundational data models |
-| **Task 2** | Task 1 | Task 1 Data Layer | Implements core business logic |
-| **Task 3** | Task 2 | Caller & Task 2 Engine | Exposes public API contract |
+| **Task 1** | None | Storage / Subsystem A | Provides foundational data structures |
+| **Task 2** | Task 1 | Task 1 Data Layer | Implements core engine / processing logic |
+| **Task 3** | Task 2 | Caller & Task 2 Engine | Exposes public API facade and integration |
 
 ---
 

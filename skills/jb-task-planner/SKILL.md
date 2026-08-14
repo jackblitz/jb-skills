@@ -1,11 +1,11 @@
 ---
 name: jb-task-planner
-description: The granular technical planning skill. Collaborates on API design, test plan, and task architecture, then produces 3 unified technical documents and maps GitHub task issues. Use when the user says "Run jb-task-planner".
+description: The granular technical planning skill. Collaborates on domain models, class naming conventions, test strategy, and task architecture, then produces 3 unified technical documents and maps GitHub task issues. Use when the user says "Run jb-task-planner".
 ---
 
 # JB Task Planner: Technical Design & Task Mapping
 
-You are the Lead Engineer. Your goal is to take a Feature Requirement Document (FRD) and translate the "What" (requirements) into a precise "How" (technical architecture, public API contract, agreed test strategy, and granular task decomposition).
+You are the Lead Engineer. Your goal is to take a Feature Requirement Document (FRD) and translate the "What" (requirements) into a precise architectural blueprint: high-level domain models, class naming conventions, system data flow, overarching test strategy, and sequenced task decomposition.
 
 ## Prerequisites
 You MUST read the following artifacts before starting:
@@ -29,33 +29,34 @@ You must navigate these phases sequentially. **Do NOT post fragmented comments t
 **Goal**: Ask targeted technical questions, propose solutions, and align on technical decisions in chat without comment spam.
 
 1. **Targeted Questions**: Ask the developer focused questions regarding:
-   - Specific API conventions, method signatures, or state management preferences.
+   - Domain modeling, class/struct naming conventions, and module boundaries.
    - Any technical constraints or trade-offs within the chosen Tech Stack.
 2. **Interactive Proposal**: Present an initial proposal directly in chat covering:
-   - The proposed **Public Interface & Usage** (class/function signatures and example calls).
+   - The proposed **Domain Models & Class Naming Conventions** (classes/modules, responsibilities, naming patterns).
    - The proposed **Architecture & Task Breakdown** (how the feature is decomposed into sequenced tasks and how they interact).
-   - The proposed **Test Plan** (unit/integration test scenarios, mocking boundaries).
+   - The proposed **Overarching Test Strategy** (critical paths, mocking boundaries, acceptance benchmarks).
 3. **Iterative Refinement**: Refine the proposal based on developer feedback until explicit approval is given.
 
 ### Phase 2: Synthesis of the 3 Core Technical Documents
 **Goal**: Synthesize the agreed-upon technical plan into 3 structured documents.
 
+> ⚠️ **STRICT STORAGE RULE**: Do **NOT** create or write spec files to the repository filesystem (e.g. `doc/specs/`, `docs/specs/`, or `*.md` spec files). The specification is maintained **exclusively** as a comment on the GitHub Parent Feature issue.
+
 Generate the following 3 documents using `feature-spec-template.md` (located within this skill's directory) as a reference:
 
-#### 📄 Document 1: Public Interface & Usage Specification
-- **Public API / Class Surface**: Complete class declarations, method signatures, parameters, return types, and Doxygen/JSDoc annotations.
-- **Data Structures**: Input/output models, payload schemas, or DTOs.
-- **Concrete Usage Examples**: Clear, runnable code snippets showing how consumers instantiate, call, and handle errors with this feature.
+#### 📄 Document 1: High-Level Domain Model & Class Naming Conventions
+- **Domain Concepts & Entity Roles**: List of core classes, structs, modules, and their high-level responsibilities.
+- **Naming Conventions & Standards**: Consistent casing, prefixes, method naming standards, and error-handling patterns across the feature.
+- **Public Facade Concept**: High-level overview of how consumers and other features interact with this feature.
+- *(Note: Detailed line-by-line method signatures, parameter types, and implementation code are deferred to Just-In-Time task design during implementation).*
 
 #### 📄 Document 2: Feature Architecture & Task Decomposition
 - **System Architecture & Interaction Flow**: A Mermaid sequence or component diagram showing internal subsystem logic and data flow.
-- **Granular Task Sequencing Rule**:
-  - **Task 1 MUST always be Public Interface & Test Scaffolding**: Declares the public header/interface, public types, and base test harness based on Document 1.
-  - **Subsequent Tasks (Task 2, 3, etc.) are Implementation Tasks**: Focus on internal engines, algorithms, thread workers, storage, and subsystem logic.
+- **Granular Task Decomposition**: A numbered, logically sequenced breakdown of the work into atomic tasks (e.g. Task 1: Scaffolding & Types $\rightarrow$ Task 2: Core Subsystem / Worker $\rightarrow$ Task 3: Integration & Edge Cases).
 - **Task Interaction Matrix**: A clear explanation of how each task connects, depends on, and interacts with the other tasks to form the completed feature.
 
 #### 📄 Document 3: Agreed Test Plan & Verification Strategy
-- **Key Test Cases**: Critical path tests, boundary conditions, edge cases, and failure mode verifications.
+- **Key Test Scenarios**: Critical path tests, boundary conditions, edge cases, and failure mode verifications.
 - **Testing Approach**: Test levels (Unit vs. Integration vs. E2E), mocking/stubbing boundaries, and test fixture requirements.
 - **Acceptance Benchmarks**: Concrete validation benchmarks satisfying the FRD requirements.
 
@@ -80,10 +81,10 @@ Use the `gh` CLI to create issues for each task in the decomposition:
 [Detailed explanation of how this task contributes to the feature. Why is this the right approach? What problem does it solve?]
 
 ## 🛠 Technical Design & Implementation Plan
-[The specific design doc for this task:
-- Proposed logic flow or pseudocode.
-- Key functions to create or modify.
-- Reference to Document 1 (API) and Document 2 (Architecture).]
+[The specific design outline for this task:
+- High-level logic flow and responsibilities.
+- Key functions/structures to create or modify.
+- Reference to Document 1 (Domain Model) and Document 2 (Architecture).]
 
 ## ⚙️ System Intersections & Dependencies
 [List of components, files, or other tasks that this task interacts with or depends on]
@@ -107,7 +108,8 @@ Use the `gh` CLI to create issues for each task in the decomposition:
 3. **Handoff**: Confirm completion and announce readiness for `jb-task-implementer`.
 
 ## Guidelines
+- **High-Level Blueprint**: Focus Document 1 on domain architecture, class roles, and naming conventions. Avoid premature micro-specifications of method signatures that evolve during implementation.
+- **GitHub Issues as Sole Source of Truth**: Never create files in `doc/specs/`, `docs/specs/`, or elsewhere in the repo for specifications. All technical specifications are stored exclusively as comments on the GitHub Feature issue.
 - **No Comment Spam**: Never post intermediate drafts or piecemeal comments. Collaborate in chat and post only the finalized 3-document specification as a single comment.
-- **Contract First**: Never proceed to task creation until the public interface, architecture, and test plan are completely signed off.
 - **Atomic Tasks**: Each decomposed task must be independent, testable, and manageable for a single TDD cycle.
-- **Zero Ambiguity**: The 3 documents must leave no guesswork for `jb-task-implementer`.
+- **Zero Ambiguity**: The 3 documents must provide complete architectural clarity without premature code bloat.
