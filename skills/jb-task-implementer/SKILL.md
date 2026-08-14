@@ -43,21 +43,36 @@ You must navigate these phases sequentially.
 5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
 6. **Final Verification**: Run the entire test suite one last time to ensure 100% pass rate.
 
-### Phase 2: Delivery & Handoff
-**Goal**: Deliver a production-ready Pull Request to the feature branch for independent human or lead review.
+### Phase 2: Delivery & Review Handoff
+**Goal**: Deliver a production-ready Pull Request to the feature branch for independent human or lead review, with explicit instructions for issue closure upon merge.
 
-1. **Pull Request**: Create a single, comprehensive Pull Request from `task/[task-id]` to `feature/[feature-name]`. **The PR body MUST include `Closes #ISSUE_NUMBER` (replacing #ISSUE_NUMBER with the task issue number) to ensure the issue is automatically linked and closed upon merge.**
-    - Include the public interface, the full test suite, and the internal implementation.
-2. **Submission**: Present the PR link and a concise implementation summary to the user / supervising agent.
-    - *Agent Role*: Act as the **Senior Engineer** presenting completed work for code review.
-    - *Wait for Review*: Stop execution immediately after presenting the PR.
+1. **Pull Request Creation**:
+   Create a single, comprehensive Pull Request from `task/[task-id]` to `feature/[feature-name]` using `gh pr create`:
+   ```bash
+   gh pr create --base "feature/[feature-name]" --head "task/[task-id]" --title "[Feature Name] Task: [Short Description]" --body "[PR Body]"
+   ```
+   **PR Body Requirements**:
+   - Must include `Closes #[TASK_ISSUE_NUMBER]` in the body for cross-linking.
+   - Include a concise summary of:
+     - Public interface implementations.
+     - Test suite coverage (unit and integration tests).
+     - Internal logic changes.
+
+2. **Submission & Reviewer Action Prompt**:
+   Present the PR link and a concise implementation summary to the user / supervising agent.
+   Provide the exact reviewer command to merge the PR and close the task issue:
+   > 💡 *Note: Because this PR merges into `feature/[feature-name]` (not the default `main` branch), GitHub will not auto-close the issue on merge. The reviewer (human or lead agent) should execute the following command upon approving the PR:*
+   > ```bash
+   > gh pr merge [PR_NUMBER] --merge --delete-branch && gh issue close [TASK_ISSUE_NUMBER] --comment "Completed and merged into feature/[feature-name] via PR #[PR_NUMBER]"
+   > ```
+
 3. **Strict Prohibition on Self-Review & Self-Merging**:
-    - **NEVER merge your own Pull Request.**
-    - **NEVER close the task issue manually.**
-    - All code review, approval, merging, and closure must be performed by the **human developer** or the **guiding review agent**. Your task execution ends the moment the PR is created and submitted for review.
+   - **Author Role Only**: The implementing agent is strictly the code author.
+   - **No Self-Merging**: Do **NOT** run `gh pr merge`, `git merge`, or `gh issue close` yourself.
+   - Your task execution is complete the moment the PR is created and submitted for review.
 
 ## Guidelines
-- **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review and merging must be performed independently by the human developer or the guiding lead agent.
+- **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review, merging, and task issue closure must be performed independently by the human developer or the guiding lead agent.
 - **Ownership**: You are the owner of this task's implementation. If you find a discrepancy in the spec or a better technical approach, propose it during Phase 0, not halfway through implementation.
 - **Strict TDD**: Always ensure the tests are written and failing before the logic is implemented.
 - **Zero Drift**: The Full Feature Specification is the absolute source of truth. Do not deviate from the approved contract.
