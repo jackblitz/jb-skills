@@ -643,7 +643,7 @@ gitGraph
       goal: "Execute uninterrupted Test-Driven Development (Red -> Green -> Refactor) and submit Task PR.",
       anchor: "Task PR -> feature/* Branch",
       phases: [
-        { name: "Phase 0: Knowledge Sync & Alignment", desc: "Reads Task issue, spec comments, Tech Stack, and CODING_STANDARDS.md; presents Implementation Path for user signoff." },
+        { name: "Phase 0: Knowledge Sync & Alignment", desc: "Reads Task issue, spec comments, Tech Stack; presents task-tailored Scope of Changes & Test Plan for user signoff (no unrelated header dumps)." },
         { name: "Phase 1: Senior TDD Execution", desc: "Branch task/[id] -> Interface Implementation -> Red (failing tests) -> Green (passing logic) -> Refactor against CODING_STANDARDS.md -> 100% verification." },
         { name: "Phase 2: Delivery & Handoff", desc: "Submits PR to feature/[name] with 'Closes #TASK_ISSUE' and provides exact merge/close command for reviewer (strictly no self-merging)." }
       ]

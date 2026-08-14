@@ -21,15 +21,15 @@ Before starting, you MUST read and synthesize the following:
 You must navigate these phases sequentially.
 
 ### Phase 0: Knowledge Sync & Alignment
-**Goal**: Establish 100% clarity on the "What", "How", and "Standard" before writing code.
+**Goal**: Establish 100% clarity on the task scope, design, and verification before writing code.
 
 1. **Deep Sync**: Read all the prerequisites listed above.
-2. **Implementation Path**: Present a concise summary to the user before starting. This must include:
-    - **The Goal**: What exactly is being implemented.
-    - **The Contract**: The specific public API surface you are adhering to.
-    - **The Verification**: The key test cases you will use to prove correctness.
-    - **The Alignment**: How this implementation satisfies the product requirements in the Parent Feature.
-    - **The Standard**: Any specific coding patterns from `CODING_STANDARDS.md` that are particularly relevant here.
+2. **Implementation Path**: Present a concise, contextual summary to the user before starting. Tailor this summary to the **actual scope of THIS specific task**:
+    - **🎯 The Goal**: What specific capability, internal subsystem, or bugfix is being implemented.
+    - **🛠️ Scope of Changes**: The specific files and key internal or public functions/data structures being created or modified. (Do **NOT** dump unrelated public header files if this task is an internal logic, engine, or subsystem implementation).
+    - **🧪 Verification & Test Plan**: The specific test cases and scenarios you will write to prove correctness for this task.
+    - **⚙️ System Intersections**: How this piece connects with the rest of the codebase (e.g. dependencies, threading, mutexes, I/O).
+    - **📏 Standards & Conventions**: Specific patterns from `docs/CODING_STANDARDS.md` applicable here (e.g., method comments explaining what and why).
 3. **Confirmation**: Wait for the user to confirm your "Implementation Path".
 
 ### Phase 1: Senior TDD Execution
@@ -37,10 +37,10 @@ You must navigate these phases sequentially.
 
 1. **Branching**: Create a dedicated task branch from the feature branch.
    `git checkout "feature/[feature-name]" && git pull && git checkout -b "task/[task-id]"`
-2. **Interface Implementation**: Implement the approved public methods and variables.
-3. **Test Suite (Red)**: Implement the test suite based on the approved Test Strategy. Verify that the tests fail as expected.
+2. **Scaffolding / Interfaces**: Declare or implement any necessary types, internal headers, or function signatures required for this task.
+3. **Test Suite (Red)**: Implement the test suite based on the approved Test Strategy for this task. Verify that the tests fail as expected.
 4. **Logic Implementation (Green)**: Write the internal logic required to make all tests pass.
-5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
+5. **Refactor**: Review the code against `docs/CODING_STANDARDS.md`. Ensure all methods include comments explaining what they are doing and why. Optimize for readability, maintainability, and performance. Ensure no "code smells" are introduced.
 6. **Final Verification**: Run the entire test suite one last time to ensure 100% pass rate.
 
 ### Phase 2: Delivery & Review Handoff
@@ -54,7 +54,7 @@ You must navigate these phases sequentially.
    **PR Body Requirements**:
    - Must include `Closes #[TASK_ISSUE_NUMBER]` in the body for cross-linking.
    - Include a concise summary of:
-     - Public interface implementations.
+     - Public interface or internal scaffolding implementations.
      - Test suite coverage (unit and integration tests).
      - Internal logic changes.
 
@@ -72,6 +72,7 @@ You must navigate these phases sequentially.
    - Your task execution is complete the moment the PR is created and submitted for review.
 
 ## Guidelines
+- **Context-Specific Sync**: In Phase 0, focus on the actual code being implemented in this task. Do not ask the user to verify unrelated public interfaces if the task is an internal logic or engine component.
 - **Coding Standards & Comments**: Strictly adhere to `docs/CODING_STANDARDS.md`. Ensure all methods include comments explaining what the method is doing and why.
 - **No Self-Merging or Self-Review**: The implementing agent is strictly the code author. You MUST NEVER run `gh pr merge`, `git merge`, or close issues yourself. PR review, merging, and task issue closure must be performed independently by the human developer or the guiding lead agent.
 - **Ownership**: You are the owner of this task's implementation. If you find a discrepancy in the spec or a better technical approach, propose it during Phase 0, not halfway through implementation.
